@@ -1,0 +1,6 @@
+ docker run --name mymongosh 
+ -e MONGO_INITDB_ROOT_USERNAME=admin 
+ -e MONGO_INITDB_ROOT_PASSWORD=mongosh 
+ -v /opt/data:/data/db -p 27017:27017 mongo
+
+docker run --name mymongosh  -v /opt/data:/data/db -p 27017:27017 mongo
