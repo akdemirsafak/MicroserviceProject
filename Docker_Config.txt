@@ -1,6 +1,7 @@
- docker run --name mymongosh 
- -e MONGO_INITDB_ROOT_USERNAME=admin 
- -e MONGO_INITDB_ROOT_PASSWORD=mongosh 
- -v /opt/data:/data/db -p 27017:27017 mongo
-
+Catalog.API 
 docker run --name mymongosh  -v /opt/data:/data/db -p 27017:27017 mongo
+
+IdentityServer4 
+Linux based
+docker run --name mssql_ubuntu -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password1234" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
+default user : sa 
