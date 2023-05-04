@@ -1,6 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace SharedLibrary.Dtos;
+namespace SharedLibrary.Dtos { 
 public class Response<T>
 {
     public T Data { get;private set; }
@@ -33,10 +34,11 @@ public class Response<T>
     public static Response<T> Fail(string error, int statusCode)
     {
         return new Response<T> { 
-            Errors=new () {error },
+            Errors=new List<string>() { error },
             StatusCode = statusCode,
             IsSuccessfull = false };
     }
   
 
+}
 }

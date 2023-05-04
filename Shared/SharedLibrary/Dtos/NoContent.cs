@@ -1,6 +1,7 @@
-﻿namespace SharedLibrary.Dtos;
+﻿namespace SharedLibrary.Dtos { 
 
-public class NoContent 
-{
+    public class NoContent 
+    {
 
+    }
 }
