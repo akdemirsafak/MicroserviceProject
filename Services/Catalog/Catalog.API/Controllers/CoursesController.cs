@@ -7,11 +7,11 @@ namespace Catalog.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CourseController : CustomBaseController
+public class CoursesController : CustomBaseController
 {
     private readonly ICourseService _courseService;
 
-    public CourseController(ICourseService courseService) => _courseService = courseService;
+    public CoursesController(ICourseService courseService) => _courseService = courseService;
 
     //---!!!----//
     [HttpGet]
