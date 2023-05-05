@@ -28,6 +28,8 @@ namespace MicroserviceProject.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalApiAuthentication(); //Scope işlemleri arkaplanda dönüyor.
+
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -81,6 +83,9 @@ namespace MicroserviceProject.IdentityServer
 
             app.UseRouting();
             app.UseIdentityServer();
+
+            app.UseAuthentication();//--//
+
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
