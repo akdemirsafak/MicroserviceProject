@@ -1,11 +1,26 @@
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(configs =>
+{
+    configs.Authority = builder.Configuration["IdentityServerURL"]; //Token dağıtmakla görevli api.Kritik! Bu kısmı appSettings.json da belirttik
+    //Private key ile imzalanmış bir token geldiğinde public key ile doğrulaması yapılacak 
+    configs.Audience = "resource_catalog"; //IdentityServer'da belirttiğimiz isim.!
+    configs.RequireHttpsMetadata = false; //Http kullandığımız için.
+}); //Scheme name. Birden fazla token türü bekleniyor olabilir.Bu ayrımı yapmak için Scheme name kullanılır.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt =>
+{
+    opt.Filters.Add(new AuthorizeFilter());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 var app = builder.Build();
 

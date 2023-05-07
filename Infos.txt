@@ -28,3 +28,5 @@ AccessToken'ın ömrü olabildiğince kısa olmalıdır.Elimizdeki refresh token
 
 PhotoStock.API
 Statik dosyalarını paylaşamaz oluşturmalıyız ve middleware'i eklememiz lazım
+
+**PhotoStock'da yapılacak işlemler için Client Credential Grant Type yapılandırılması yapıldı!! IdentityServer Config'de Client olarak belirlemiştik.
