@@ -56,9 +56,10 @@ namespace MicroserviceProject.IdentityServer
                     ClientSecrets={new Secret("secret".Sha256())},
                     AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,//ResourceOwnerPasswordAndClientCredentials kullanırsak refresh token kullanamayız.
                     AllowedScopes={IdentityServerConstants.StandardScopes.Email,
-                         IdentityServerConstants.StandardScopes.OpenId
-                         ,IdentityServerConstants.StandardScopes.Profile,
+                         IdentityServerConstants.StandardScopes.OpenId,
+                         IdentityServerConstants.StandardScopes.Profile,
                          IdentityServerConstants.StandardScopes.OfflineAccess,
+                         IdentityServerConstants.LocalApi.ScopeName, //API'nin kendisine istek yapabilmesi için.
                          "roles"}, //Refresh token dönebilmemiz için OfflineAccess'de ekledik.
                     //**** OfflineAccess Kullanıcı offline olsa bile kullanıcı adına bir refresh token göndererek kullanıcı için yeni bir accesstoken almamıza olanak verir.
                     AccessTokenLifetime=1*60*60, //Default 1 saattir. saniye türünden belirtiyoruz. Access token 1 saat geçerli.
