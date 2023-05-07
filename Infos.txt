@@ -1,0 +1,26 @@
+﻿Bölüm 3 : IdentityServer4:
+github repo'su üzerinden IdentityServer4.Templates'i cmd kullanarak(proje dizini içerisinde);
+	dotnet new -i identityserver4.templates
+	dotnet new is4apid --name ProjeAdi 
+komutlarını uyguladıktan sonra Solution dosyasında yeni bir Identity Klasörü açıp buraya Existing Project ile ekliyoruz.
+Kurulum tamam.Configurations proje içerisinde..
+
+PhotoStock Api ve Catalog Api üyelik sistemine ihtiyaç duymaz.Bu api'lara istek yapılabilmesi için gelen token'da 
+	Catalog Api için
+	Aud : resource_catalog
+	Scope : coursecatalog_fullpermission
+	
+	PhotoStock.Api için 
+	Aud : resource_photo_stock
+	Scope : photo_stock_fullpermission
+alanlarının bulunması lazım.
+
+** IdentityServer'a Postman ile host:port/.well-known/openid-configuration get req ile endpointleri görüntülüyoruz.
+Token endpoint'e body'den x-www-form-urlencoded ile gereken parametreleri(client_id,client_secretve grant_type) göndererek 
+bir Client Credential Grant Type token oluşturalım.(Bu token türünü user auth. istemeyen endpointler için kullanıyoruz)
+Access Token Bearer type olarak dönecektir. Jwt.io 'dan içeriği kontrol edebiliriz.Bu token default olarak 3600 sec.(1 saat) geçerlidir.
+
+Catalog.API 'ı koruma altına alma:
+catalog.api'a jwtbearer paketini dahil ediyoruz.
+
+AccessToken'ın ömrü olabildiğince kısa olmalıdır.Elimizdeki refresh token ile yeniden access token alınabilir.

@@ -4,6 +4,7 @@
 
 using IdentityServer4;
 using IdentityServer4.Models;
+using System;
 using System.Collections.Generic;
 
 namespace MicroserviceProject.IdentityServer
@@ -19,6 +20,10 @@ namespace MicroserviceProject.IdentityServer
         public static IEnumerable<IdentityResource> IdentityResources =>
                    new IdentityResource[]
                    {
+                       new IdentityResources.Email(),
+                       new IdentityResources.OpenId(), //kullanıcının id email ve password gönderildiğinde jwt almak istiyorsak mutlaka token içerisinde(jwt payloadında) subject keyword'ünün dolu olması gerekir.OpenId mutlaka olmalı OpenIdConnect Protocol'ünün zorunlu kıldığı alandır.
+                       new IdentityResources.Profile(), //kullanıcı profil bilgileri address vs
+                       new IdentityResource(){Name="roles",DisplayName="Roles" ,Description="Kullanıcı rolleri",UserClaims=new[]{ "role"} } //Kendi claim'imizi oluşturuyoruz yukarıdakiler hazır claimler
                 //new IdentityResources.OpenId(),
                 //new IdentityResources.Profile(),
                    };
@@ -39,10 +44,29 @@ namespace MicroserviceProject.IdentityServer
                 {
                     ClientName = "Asp.Net Mvc Projesi",
                     ClientId="WebMvcClient",
-                    ClientSecrets={new Secret("secret".Sha256())}, 
-                    AllowedGrantTypes=GrantTypes.ClientCredentials,
+                    ClientSecrets={new Secret("secret".Sha256())},
+                    AllowedGrantTypes=GrantTypes.ClientCredentials, //Refresh token barındırmaz.
                     AllowedScopes={"catalog_fullpermission","photo_stock_fullpermission", IdentityServerConstants.LocalApi.ScopeName} //Bu scope'da belirlediğimiz clientId ve Secret ile hangi api'lara istek yapılabileceğini burada belirtiyoruz.
-                }
+                },
+                 new Client()
+                {
+                    ClientName = "Asp.Net Mvc Projesi",
+                    ClientId="WebMvcClientForUser",
+                    AllowOfflineAccess=true,
+                    ClientSecrets={new Secret("secret".Sha256())},
+                    AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,//ResourceOwnerPasswordAndClientCredentials kullanırsak refresh token kullanamayız.
+                    AllowedScopes={IdentityServerConstants.StandardScopes.Email,
+                         IdentityServerConstants.StandardScopes.OpenId
+                         ,IdentityServerConstants.StandardScopes.Profile,
+                         IdentityServerConstants.StandardScopes.OfflineAccess,
+                         "roles"}, //Refresh token dönebilmemiz için OfflineAccess'de ekledik.
+                    //**** OfflineAccess Kullanıcı offline olsa bile kullanıcı adına bir refresh token göndererek kullanıcı için yeni bir accesstoken almamıza olanak verir.
+                    AccessTokenLifetime=1*60*60, //Default 1 saattir. saniye türünden belirtiyoruz. Access token 1 saat geçerli.
+                    RefreshTokenExpiration=TokenExpiration.Absolute, //Refresh token süresini istediğimiz zaman uzatacak mıyız ayarı.Yaptığımız ayar sabite denk gelir.
+                    AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds, //Refresh token 60 gün
+                    RefreshTokenUsage=TokenUsage.ReUse //Tekrar kullanılabilir Refresh token
+                    // ! Her accesstoken alımında yeni bir refresh token da alınacaktır!.
+                 }
                 
 
                 //// interactive client using code flow + pkce
