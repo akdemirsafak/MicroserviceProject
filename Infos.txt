@@ -24,3 +24,7 @@ Catalog.API 'ı koruma altına alma:
 catalog.api'a jwtbearer paketini dahil ediyoruz.
 
 AccessToken'ın ömrü olabildiğince kısa olmalıdır.Elimizdeki refresh token ile yeniden access token alınabilir.
+
+
+PhotoStock.API
+Statik dosyalarını paylaşamaz oluşturmalıyız ve middleware'i eklememiz lazım

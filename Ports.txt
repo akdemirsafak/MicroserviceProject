@@ -1,2 +1,4 @@
 Services
 Catalog.API Port : 5011,
+IdentityServer Port : 5001
+PhotoStock.API Port : 5012
