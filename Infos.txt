@@ -48,7 +48,7 @@ Resource Owner için :
 Client Credential için :
 	client_id=WebMvcClient,
 	client_secret=secret,
-	grant_type=client_credential
+	grant_type=client_credentials
 2-) https://localhost:5001/api/User/Signup Kullanıcı kaydı yapılması (Token ile authorize2.0 kullanılır.)
 	{
 		Email,UserName,Password,City
