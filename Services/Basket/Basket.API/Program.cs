@@ -1,6 +1,7 @@
-using Basket.API.Services;
+﻿using Basket.API.Services;
 using Basket.API.Settings;
 using Microsoft.Extensions.Options;
+using SharedLibrary.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,9 @@ builder.Services.AddSingleton<RedisService>(serviceProvider =>
     redis.Connect();
     return redis;
 });
+
+builder.Services.AddHttpContextAccessor(); //SharedLib'de userId'ye ulaşmak amacıyla oluşturduğumuz SharedIdentityService'e erişebilmek için dahil ettik.
+builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
 var app = builder.Build();
 

@@ -61,3 +61,8 @@ Client Credential için :
 8-) http://localhost:5011/api/Categories GET ById/ querystring'den id parametresi ile getbyId isteği oluşturur.
 9-) 
 
+
+Basket.API
+
+SharedLibrary'e ISharedIdentityService ekledik ve implementasyonunu yaptık.Buradaki amaç Gelen jwt'deki datayı(userId) okuyabilmek.HttpContext'de bu veriler claim olarak barınmakta.
+Ayrıca HttpContext üzerinden req ve res'a erişebiliriz.
