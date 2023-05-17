@@ -66,3 +66,6 @@ Basket.API
 
 SharedLibrary'e ISharedIdentityService ekledik ve implementasyonunu yaptık.Buradaki amaç Gelen jwt'deki datayı(userId) okuyabilmek.HttpContext'de bu veriler claim olarak barınmakta.
 Ayrıca HttpContext üzerinden req ve res'a erişebiliriz.
+
+Jwt ile yapılan istekte token results view'de nameidentifier userId barındırıyor fakat sub'dan almamız gerekiyor.Burada framework devreye girerek sub'ı nameidentifier claim'ine dönüştürüyor.
+Nameidentifier mvc uygulamasında cookie bazlı auth. yaptığımızda userId getirir. Bir karmaşa çıkarmamak için ilgili düzenlemeleri yapacağız.
