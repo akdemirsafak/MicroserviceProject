@@ -5,3 +5,8 @@ IdentityServer4
 Linux based
 docker run --name mssql_ubuntu -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password1234" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
 default user : sa 
+
+Discount Postgresql
+docker run --name discountDb -d postgres
+(user name password postgres)
+

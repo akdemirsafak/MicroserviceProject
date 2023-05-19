@@ -74,3 +74,15 @@ Discount.API
 Projede çeşitlilik olması açısından postgresql/dapper kullanılacak.Bu projede indirim kuponları tutulacak.
 Tek bir tablo için bunu kullanmak mantıklı değil.Gerçek hayatta nosql bir db'de tutmak best practice ve mantıklı çözümdür.
 
+Dapper ve Dapper.Contrib arasındaki fark Contrib'in temel crud işlemleri için helper sağlar.
+Eğitimi uzatmamak amacıyla Repository katmanını içerisinde olması gerekenleri services içerisinde kullandık.
+
+Discount table oluşturulurken tablo alanları :
+	create table Discount
+	(
+	Id serial primary key,
+	userId varchar(100)unique not null,
+	Rate smallint not null,
+	Code varchar(30) not null,
+	CreatedTime timestamp not null default CURRENT_TIMESTAMP
+	)
