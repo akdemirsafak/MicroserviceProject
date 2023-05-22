@@ -36,10 +36,13 @@ public class DiscountService : IDiscountService
 
     public async Task<Response<DiscountModel>> GetByCodeAndUserId(string code, string userId)
     {
-        var discount = await _dbConnection.QueryAsync<DiscountModel>("Select * from discount where userid=@UserId and code=@Code");
+        var query = "Select * from discount where userid=@UserId and code=@Code";
         var parameters= new DynamicParameters();
         parameters.Add("UserId", userId, DbType.String);
         parameters.Add("Code", code, DbType.String);
+
+        var discount = await _dbConnection.QueryAsync<DiscountModel>(query,parameters);
+      
         var hasDiscount = discount.FirstOrDefault();
 
         if (hasDiscount==null)
@@ -52,11 +55,14 @@ public class DiscountService : IDiscountService
 
     public async Task<Response<NoContent>> Save(DiscountModel discountModel)
     {
-        var affectedRowCount = await _dbConnection.ExecuteAsync("INSERT INTO discount (userid,rate,code) VALUES (@UserId,@Rate,@Code)");
+        var command = "INSERT INTO discount (userid,rate,code) VALUES (@UserId,@Rate,@Code)";
         var parameters = new DynamicParameters();
-        parameters.Add("UserId",discountModel.UserId,DbType.String);
-        parameters.Add("Rate",discountModel.Rate,DbType.Int32);
+        parameters.Add("UserId", discountModel.UserId, DbType.String);
+        parameters.Add("Rate", discountModel.Rate, DbType.Int32);
         parameters.Add("Code", discountModel.Code, DbType.String);
+
+        var affectedRowCount = await _dbConnection.ExecuteAsync(command,parameters);
+      
         if (affectedRowCount > 0)
         {
             return Response<NoContent>.Success(201);
@@ -71,14 +77,16 @@ public class DiscountService : IDiscountService
         //{
         //    return Response<NoContent>.Fail("Record is not found", 404);
         //}
-        var affectedRowCount = await _dbConnection.ExecuteAsync("Update discount set userid=@UserId,rate=@Rate,code=@Code where id=@discountId");
-
         var parameters = new DynamicParameters();
-       
         parameters.Add("UserId", discountModel.UserId, DbType.String);
         parameters.Add("Rate", discountModel.Rate, DbType.Int32);
         parameters.Add("Code", discountModel.Code, DbType.String);
-        parameters.Add("discountId",discountModel.Id,DbType.Int32);
+        parameters.Add("Id",discountModel.Id,DbType.Int32);
+
+        var command = "Update discount set userid=@UserId, rate=@Rate, code=@Code where id=@Id";
+        var affectedRowCount = await _dbConnection.ExecuteAsync(command,parameters);
+
+
         if (affectedRowCount > 0)
         {
             return Response<NoContent>.Success(204);

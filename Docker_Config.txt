@@ -7,6 +7,5 @@ docker run --name mssql_ubuntu -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password
 default user : sa 
 
 Discount Postgresql
-docker run --name discountDb -d postgres
-(user name password postgres)
+docker run --name discountDb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5555:5432 -d postgres
 
