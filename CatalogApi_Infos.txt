@@ -1,0 +1,6 @@
+﻿Catalog Api üyelik sistemine ihtiyaç duymaz.Bu api'lara istek yapılabilmesi için gelen token'da 
+	Catalog Api için
+	Aud : resource_catalog
+	Scope : coursecatalog_fullpermission
+	
+alanlarının bulunması lazım.

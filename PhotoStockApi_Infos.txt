@@ -1,0 +1,16 @@
+﻿
+PhotoStock.API
+Statik dosyalarını paylaşamaz oluşturmalıyız ve middleware'i eklememiz lazım
+
+**PhotoStock'da yapılacak işlemler için Client Credential Grant Type yapılandırılması yapıldı!! IdentityServer Config'de Client olarak belirlemiştik.
+
+
+!Azure Blob Storage dosya kaydetmek için güzel bir servis.Hızlıca download-update işlemi yapmayı sağlar.Bloblara böler ve async şekilde işlemleri gerçekleştirir.
+Aws de kullanılabilir dosya işlemleri için cloud kullanmak best practice'dir.
+
+
+PhotoStock Api üyelik sistemine ihtiyaç duymaz.Bu api'lara istek yapılabilmesi için gelen token'da 
+	PhotoStock.Api için 
+	Aud : resource_photo_stock
+	Scope : photo_stock_fullpermission
+alanlarının bulunması lazım.

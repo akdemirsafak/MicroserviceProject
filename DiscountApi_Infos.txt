@@ -1,0 +1,24 @@
+﻿Discount.API
+
+Projede çeşitlilik olması açısından postgresql/dapper kullanılacak.Bu projede indirim kuponları tutulacak.
+Tek bir tablo için bunu kullanmak mantıklı değil.Gerçek hayatta nosql bir db'de tutmak best practice ve mantıklı çözümdür.
+
+Dapper ve Dapper.Contrib arasındaki fark Contrib'in temel crud işlemleri için helper sağlar.
+Eğitimi uzatmamak amacıyla Repository katmanını içerisinde olması gerekenleri services içerisinde kullandık.
+
+Discount table oluşturulurken tablo alanları :
+		create table Discount
+		(
+		Id serial primary key,
+		userid varchar(100) not null,
+		rate smallint not null,
+		code varchar(30) not null,
+		createdTime timestamp not null default CURRENT_TIMESTAMP
+		)
+
+
+**** Üyelik sistemi gerektiren api'ların Program.cs inde
+	var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+	services.AddControllers(opt=>{
+	opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy))});
+uyguladık. yani client credential olanlarda gerek yok iken Resource owner için gereklidir.!

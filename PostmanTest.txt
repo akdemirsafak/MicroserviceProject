@@ -1,0 +1,23 @@
+﻿
+///--- Postman ile testlerin yapılması parametreler ve diğer ayrıntılar ---///
+1-) http://localhost:5001/connect/token'a body'den x-www-form-urlencoded'den token alınması.
+Resource Owner için :
+	client_id=WebMvcClientForUser,
+	client_secret=secret,
+	grant_type=password,
+	username=user2@gmail.com,
+	password=Password-1234
+Client Credential için :
+	client_id=WebMvcClient,
+	client_secret=secret,
+	grant_type=client_credentials
+2-) https://localhost:5001/api/User/Signup Kullanıcı kaydı yapılması (Token ile authorize2.0 kullanılır.)
+	{
+		Email,UserName,Password,City
+	}
+3-) http://localhost:5001/api/User/GetUser (Oluşturulan token'ın hangi kullanıcıyı temsil ettiğini görürüz.)
+4-) http://localhost:5012/api/photos Post isteği ile CREATE PHOTO Authorize ve body'den form-data seçimi ile key photo(file) value dosya ismi
+5-) http://localhost:5012/api/photos Post isteği DELETE PHOTO parametre olarak querystring photoUrl alır.
+6-) http://localhost:5011/api/Categories Post isteği ile CREATE CATEGORY json formatında sadece name parametresi alır.
+7-) http://localhost:5011/api/Categories GET reqest.Without params will take all categories .
+8-) http://localhost:5011/api/Categories GET ById/ querystring'den id parametresi ile getbyId isteği oluşturur.
