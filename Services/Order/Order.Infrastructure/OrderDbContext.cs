@@ -9,13 +9,23 @@ public class OrderDbContext:DbContext
     {
         //Base e options'u yolladık.
     }
-    DbSet<Domain.OrderAggregate.Order> Orders { get; set; }
-    DbSet<Domain.OrderAggregate.OrderItem> OrderItems { get; set; }
+    public DbSet<Domain.OrderAggregate.Order> Orders { get; set; }
+    public DbSet<Domain.OrderAggregate.OrderItem> OrderItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Domain.OrderAggregate.Order>().ToTable("Orders", DEFAULT_SCHEMA);
         modelBuilder.Entity<Domain.OrderAggregate.OrderItem>().ToTable("Orders", DEFAULT_SCHEMA);
         base.OnModelCreating(modelBuilder);
+    }
+    public override int SaveChanges()
+    {
+        //Throw events here.
+        return base.SaveChanges();
+    }
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        //Throw events here.
+        return base.SaveChangesAsync(cancellationToken);
     }
 }
