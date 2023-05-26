@@ -26,7 +26,11 @@ public class Order :Entity,IAggregateRoot
     //Kapsülleme işlemi yaptık.
 
 
-    public Order(Address address, string buyerId)
+    public Order()
+    {
+        
+    }
+    public Order(Address address, string buyerId) //Custom constructure'un yanısıra default ctor da belirtmeliyiz.
     {
         Address = address;
         BuyerId = buyerId;
@@ -39,6 +43,7 @@ public class Order :Entity,IAggregateRoot
         if (!existProduct)
         {
             var orderItem = new OrderItem(productid, productname, pictureurl, price); //OrderItem Ctor'u ile ekledik.
+            _orderItems.Add(orderItem);
         }
     }
 

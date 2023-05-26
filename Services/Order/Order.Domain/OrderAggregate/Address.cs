@@ -8,16 +8,14 @@ public class Address : ValueObject
     public string Province { get;private set; }
     public string District { get; private set; }
     public string Street { get; private set; }
-    public string City { get; private set; }
     public string Line { get; private set; }
     public string ZipCode { get; private set; }
 
-    public Address(string province, string district, string street, string city, string line, string zipCode)
+    public Address(string province, string district, string street, string line, string zipCode)
     {
         Province = province;
         District = district;
         Street = street;
-        City = city;
         Line = line;
         ZipCode = zipCode;
     }
@@ -34,7 +32,6 @@ public class Address : ValueObject
         yield return Province;
         yield return District;
         yield return Street;
-        yield return City;
         yield return ZipCode;
         yield return Line;
     }

@@ -18,7 +18,6 @@ namespace Order.Application.Commands.CreateOrder
                 request.Address.Province,
                 request.Address.District,
                 request.Address.Street,
-                request.Address.City,
                 request.Address.Line,
                 request.Address.ZipCode
             );

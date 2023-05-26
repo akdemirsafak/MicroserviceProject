@@ -9,3 +9,5 @@ default user : sa
 Discount Postgresql
 docker run --name discountDb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5555:5432 -d postgres
 
+Order.API
+docker run --name OrderDb -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password1234" -p 1444:1433 -d mcr.microsoft.com/mssql/server:2022-latest //Default User=sa
