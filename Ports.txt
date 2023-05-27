@@ -5,3 +5,4 @@ PhotoStock.API	Port : 5012
 Basket.API		Port : 5013 (Ayrıca Redis Default port 6379) RedisSettings adlı Class üzerinden (options pattern ile)
 Discount.API	Port : 5014 Docker 5551
 Order.API		Port : 5015 Docker 1444 (sql Server )
+FakePayment.API	Port : 5016

@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "Services\Cat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7DB0F963-0EF5-4390-B0DF-15682C6E5BE4}"
 	ProjectSection(SolutionItems) = preProject
+		BasketApi_Infos.txt = BasketApi_Infos.txt
 		CatalogApi_Infos.txt = CatalogApi_Infos.txt
 		DiscountApi_Infos.txt = DiscountApi_Infos.txt
-		BasketApi_Infos.txt = BasketApi_Infos.txt
 		Docker_Config.txt = Docker_Config.txt
 		Infos.txt = Infos.txt
 		OrderApi_Infos.txt = OrderApi_Infos.txt
@@ -44,15 +44,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discount.API", "Services\Di
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{F755FFBD-D42C-4BE7-B0EE-25E20A473ED8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.API", "Services\Order\Order.API\Order.API.csproj", "{26D62D32-5FC8-4E85-8AAD-F2C9B1411CFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.API", "Services\Order\Order.API\Order.API.csproj", "{26D62D32-5FC8-4E85-8AAD-F2C9B1411CFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Application", "Services\Order\Order.Application\Order.Application.csproj", "{4D1B96AD-1323-4968-81C1-3BC3FFA5D9E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Application", "Services\Order\Order.Application\Order.Application.csproj", "{4D1B96AD-1323-4968-81C1-3BC3FFA5D9E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Domain", "Services\Order\Order.Domain\Order.Domain.csproj", "{7378E58F-7F48-46A1-9327-67282CA242E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Domain", "Services\Order\Order.Domain\Order.Domain.csproj", "{7378E58F-7F48-46A1-9327-67282CA242E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Domain.Core", "Services\Order\Order.Domain.Core\Order.Domain.Core.csproj", "{A7A3A6E7-B415-43DD-ADEF-F1F6B966DE5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Domain.Core", "Services\Order\Order.Domain.Core\Order.Domain.Core.csproj", "{A7A3A6E7-B415-43DD-ADEF-F1F6B966DE5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Infrastructure", "Services\Order\Order.Infrastructure\Order.Infrastructure.csproj", "{0A2AA646-8C76-45AE-9120-35FF8BEB3644}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Infrastructure", "Services\Order\Order.Infrastructure\Order.Infrastructure.csproj", "{0A2AA646-8C76-45AE-9120-35FF8BEB3644}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FakePayment", "FakePayment", "{F56105A9-F114-4DF8-8B7B-C6088949E666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakePayment.API", "Services\FakePayment\FakePayment.API\FakePayment.API.csproj", "{C693E927-00CD-4130-B2A9-57288C91D5FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +108,10 @@ Global
 		{0A2AA646-8C76-45AE-9120-35FF8BEB3644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A2AA646-8C76-45AE-9120-35FF8BEB3644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A2AA646-8C76-45AE-9120-35FF8BEB3644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C693E927-00CD-4130-B2A9-57288C91D5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C693E927-00CD-4130-B2A9-57288C91D5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C693E927-00CD-4130-B2A9-57288C91D5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C693E927-00CD-4130-B2A9-57288C91D5FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +133,8 @@ Global
 		{7378E58F-7F48-46A1-9327-67282CA242E2} = {F755FFBD-D42C-4BE7-B0EE-25E20A473ED8}
 		{A7A3A6E7-B415-43DD-ADEF-F1F6B966DE5A} = {F755FFBD-D42C-4BE7-B0EE-25E20A473ED8}
 		{0A2AA646-8C76-45AE-9120-35FF8BEB3644} = {F755FFBD-D42C-4BE7-B0EE-25E20A473ED8}
+		{F56105A9-F114-4DF8-8B7B-C6088949E666} = {6CE0AB06-8AA9-492F-A297-08A1237F1389}
+		{C693E927-00CD-4130-B2A9-57288C91D5FE} = {F56105A9-F114-4DF8-8B7B-C6088949E666}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8E48F0B-5369-41F3-8D85-699375F03243}
