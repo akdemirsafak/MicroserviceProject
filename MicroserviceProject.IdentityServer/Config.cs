@@ -17,7 +17,8 @@ namespace MicroserviceProject.IdentityServer
             new ApiResource("resource_photo_stock"){Scopes={"photo_stock_fullpermission"}},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName),
             new ApiResource("resource_basket"){Scopes={"basket_fullpermission"}},
-            new ApiResource("resource_discount"){Scopes={"discount_fullpermission","discount_read","discount_write"}}
+            new ApiResource("resource_discount"){Scopes={"discount_fullpermission","discount_read","discount_write"}},
+            new ApiResource("resource_order"){Scopes={"order_fullpermission"}},
         }; // audience'lara karşılık gelecek.
         public static IEnumerable<IdentityResource> IdentityResources =>
                    new IdentityResource[]
@@ -39,7 +40,8 @@ namespace MicroserviceProject.IdentityServer
                 new ApiScope("basket_fullpermission","Basket Api için full erişim"),
                 new ApiScope("discount_fullpermission","Discount için full erişim."),
                 new ApiScope("discount_read","Discount için read."),
-                new ApiScope("discount_write","Discount için write.")
+                new ApiScope("discount_write","Discount için write."),
+                new ApiScope("order_fullpermission","OrderApi için full erişim")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -60,7 +62,7 @@ namespace MicroserviceProject.IdentityServer
                     AllowOfflineAccess=true,
                     ClientSecrets={new Secret("secret".Sha256())},
                     AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,//ResourceOwnerPasswordAndClientCredentials kullanırsak refresh token kullanamayız.
-                    AllowedScopes={"basket_fullpermission","discount_fullpermission", IdentityServerConstants.StandardScopes.Email,
+                    AllowedScopes={"basket_fullpermission","discount_fullpermission","order_fullpermission", IdentityServerConstants.StandardScopes.Email,
                          IdentityServerConstants.StandardScopes.OpenId,
                          IdentityServerConstants.StandardScopes.Profile,
                          IdentityServerConstants.StandardScopes.OfflineAccess,

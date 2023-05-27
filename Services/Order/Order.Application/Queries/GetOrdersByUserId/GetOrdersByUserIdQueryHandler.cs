@@ -11,7 +11,10 @@ namespace Order.Application.Queries.GetOrdersByUserId
     {
         private readonly OrderDbContext _dbContext;
 
-        public GetOrdersByUserIdQueryHandler(OrderDbContext dbContext)=> _dbContext=dbContext;
+        public GetOrdersByUserIdQueryHandler(OrderDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public async Task<Response<List<OrderDto>>> Handle(GetOrdersByUserIdQuery request, CancellationToken cancellationToken)
         {
