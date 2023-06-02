@@ -19,7 +19,8 @@ namespace MicroserviceProject.IdentityServer
             new ApiResource("resource_basket"){Scopes={"basket_fullpermission"}},
             new ApiResource("resource_discount"){Scopes={"discount_fullpermission","discount_read","discount_write"}},
             new ApiResource("resource_order"){Scopes={"order_fullpermission"}},
-            new ApiResource("resource_fakepayment"){Scopes={"fakepayment_fullpermission"}}
+            new ApiResource("resource_fakepayment"){Scopes={"fakepayment_fullpermission"}},
+            new ApiResource("resource_gateway"){Scopes={"gateway_fullpermission"}}
         }; // audience'lara karşılık gelecek.
         public static IEnumerable<IdentityResource> IdentityResources =>
                    new IdentityResource[]
@@ -43,7 +44,8 @@ namespace MicroserviceProject.IdentityServer
                 new ApiScope("discount_read","Discount için read."),
                 new ApiScope("discount_write","Discount için write."),
                 new ApiScope("order_fullpermission","OrderApi için full erişim"),
-                new ApiScope("fakepayment_fullpermission","Fakepayment için full erişim")
+                new ApiScope("fakepayment_fullpermission","Fakepayment için full erişim"),
+                  new ApiScope("gateway_fullpermission","Gateway için full erişim")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -55,7 +57,10 @@ namespace MicroserviceProject.IdentityServer
                     ClientId="WebMvcClient",
                     ClientSecrets={new Secret("secret".Sha256())},
                     AllowedGrantTypes=GrantTypes.ClientCredentials, //Refresh token barındırmaz.
-                    AllowedScopes={"catalog_fullpermission","photo_stock_fullpermission", IdentityServerConstants.LocalApi.ScopeName} //Bu scope'da belirlediğimiz clientId ve Secret ile hangi api'lara istek yapılabileceğini burada belirtiyoruz.
+                    AllowedScopes={"catalog_fullpermission",
+                        "photo_stock_fullpermission",
+                        "gateway_fullpermission", 
+                        IdentityServerConstants.LocalApi.ScopeName} //Bu scope'da belirlediğimiz clientId ve Secret ile hangi api'lara istek yapılabileceğini burada belirtiyoruz.
                 },
                  new Client()
                 {
@@ -64,7 +69,12 @@ namespace MicroserviceProject.IdentityServer
                     AllowOfflineAccess=true,
                     ClientSecrets={new Secret("secret".Sha256())},
                     AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,//ResourceOwnerPasswordAndClientCredentials kullanırsak refresh token kullanamayız.
-                    AllowedScopes={"basket_fullpermission","discount_fullpermission","order_fullpermission","fakepayment_fullpermission", IdentityServerConstants.StandardScopes.Email,
+                    AllowedScopes={"basket_fullpermission",
+                         "discount_fullpermission",
+                         "gateway_fullpermission", //Kullanıcı için bir token alındığında gidilebilecek mikroservisler.
+                         "order_fullpermission",
+                         "fakepayment_fullpermission", 
+                         IdentityServerConstants.StandardScopes.Email,
                          IdentityServerConstants.StandardScopes.OpenId,
                          IdentityServerConstants.StandardScopes.Profile,
                          IdentityServerConstants.StandardScopes.OfflineAccess,

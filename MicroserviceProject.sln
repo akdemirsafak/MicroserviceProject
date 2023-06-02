@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CatalogApi_Infos.txt = CatalogApi_Infos.txt
 		DiscountApi_Infos.txt = DiscountApi_Infos.txt
 		Docker_Config.txt = Docker_Config.txt
+		Gateway.txt = Gateway.txt
 		Infos.txt = Infos.txt
 		OrderApi_Infos.txt = OrderApi_Infos.txt
 		PhotoStockApi_Infos.txt = PhotoStockApi_Infos.txt
@@ -56,11 +57,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Infrastructure", "Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FakePayment", "FakePayment", "{F56105A9-F114-4DF8-8B7B-C6088949E666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakePayment.API", "Services\FakePayment\FakePayment.API\FakePayment.API.csproj", "{C693E927-00CD-4130-B2A9-57288C91D5FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakePayment.API", "Services\FakePayment\FakePayment.API\FakePayment.API.csproj", "{C693E927-00CD-4130-B2A9-57288C91D5FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{841D9003-502B-4C7D-B944-16AE912B4B41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceGateway", "Gateways\MicroserviceGateway\MicroserviceGateway.csproj", "{10B59349-D03A-4E5D-99D0-00115A9EE067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceGateway", "Gateways\MicroserviceGateway\MicroserviceGateway.csproj", "{10B59349-D03A-4E5D-99D0-00115A9EE067}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

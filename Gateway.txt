@@ -1,0 +1,16 @@
+﻿DownstreamPathTemplate : Api Gateway'den ilgili microservice'e gidecek url. Microservice url'leri.
+
+UpstreamPathTemplate : API gateway'e gelen url. Client'in yaptığı istek.
+
+Client UpstreamPathTemplate'e istek yapar, gateway ise DownstreamPathTemplate'e gönderir.
+
+BaseUrl api gateway'in url'i
+
+"UpstreamPathTemplate": "/services/catalog/{everything}" => ocelot'tan gelen bir ayardır. catalog'dan sonra ne yazılırsa yazılsın downstream'deki path'e gönder.
+
+////////////////////// Açıklama /////////////////////////
+   "DownstreamPathTemplate": "/api/{everything}",
+    "UpstreamPathTemplate": "/services/catalog/{everything}"
+    http://localhost:5000/services/catalog/courses/savecourse client buraya istek yapar. 5000 gateway portu
+    http://localhost:5011/api/courses/savecourse yaptığı isteği gateway buraya iletir. 5011 microservice portu
+////////////////////// Açıklama /////////////////////////
