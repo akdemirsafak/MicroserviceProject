@@ -8,3 +8,4 @@ Order.API		Port : 5015 Docker 1444 (sql Server )
 FakePayment.API	Port : 5016
 
 Gateway			Port : 5000
+Web				Port : 5010
