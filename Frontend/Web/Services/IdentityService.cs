@@ -39,7 +39,7 @@ public class IdentityService : IIdentityService
         throw new NotImplementedException();
     }
 
-    public async Task<Response<bool>> SignIn(SignInInput signInInput)
+    public async Task<Response<bool>> SignInAsync(SignInInput signInInput)
     {
         var discovery= await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
         {

@@ -1,5 +1,6 @@
 using Web.Models;
 using Web.Services;
+using Web.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient<IIdentityService,IdentityService>();
 
 
 
