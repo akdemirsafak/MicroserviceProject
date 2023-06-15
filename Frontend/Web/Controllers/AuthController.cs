@@ -27,13 +27,14 @@ namespace Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(signInInput);
+                return View();
             }
 
             var response= await _identityService.SignInAsync(signInInput);
             if (!response.IsSuccessfull)
             {
                 response.Errors.ForEach(error => { ModelState.AddModelError(String.Empty, error); });
+                return View();
             }
 
             return RedirectToAction(nameof(Index), "Home");

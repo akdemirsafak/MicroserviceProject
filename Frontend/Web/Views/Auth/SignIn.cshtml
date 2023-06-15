@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "SignIn";
+    
 }
 @model SignInInput
 
@@ -11,8 +12,8 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Üye Girişi</h5>
-                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-                 <form>
+                <div class="text-danger list-unstyled" asp-validation-summary="ModelOnly"></div>
+                <form method="post">                   
                     <div class="mb-3">
                         <label asp-for="Email" class="form-label"></label>
                         <input class="form-control" asp-for="Email">
