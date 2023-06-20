@@ -33,7 +33,7 @@ public class IdentityService : IIdentityService
 
         var discovery= await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
         {
-            Address=_serviceApiSettings.BaseUri,
+            Address=_serviceApiSettings.IdentityBaseUri,
             Policy= new DiscoveryPolicy{RequireHttps=false }
         }); 
 
@@ -81,7 +81,7 @@ public class IdentityService : IIdentityService
     {
         var discovery= await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
         {
-            Address=_serviceApiSettings.BaseUri,
+            Address=_serviceApiSettings.IdentityBaseUri,
             Policy= new DiscoveryPolicy{RequireHttps=false }
         });
         if (discovery.IsError)
@@ -105,7 +105,7 @@ public class IdentityService : IIdentityService
     {
         var discovery= await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
         {
-            Address=_serviceApiSettings.BaseUri,
+            Address=_serviceApiSettings.IdentityBaseUri,
             Policy= new DiscoveryPolicy{RequireHttps=false }
         }); //IdentiyModel'den client için yazılmış. Default olarak https'e istek yapar.
 
