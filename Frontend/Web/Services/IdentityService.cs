@@ -19,7 +19,7 @@ public class IdentityService : IIdentityService
     private readonly ClientSettings _clientSettings;
     private readonly ServiceApiSettings _serviceApiSettings;
 
-    public IdentityService(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, 
+    public IdentityService(HttpClient httpClient, IHttpContextAccessor httpContextAccessor,
         IOptions<ClientSettings> clientSettings, IOptions<ServiceApiSettings> serviceApiSettings) //Program.cs de singleton olarak da ayarlanabilirdi.
     {
         _httpClient = httpClient;
@@ -35,7 +35,7 @@ public class IdentityService : IIdentityService
         {
             Address=_serviceApiSettings.IdentityBaseUri,
             Policy= new DiscoveryPolicy{RequireHttps=false }
-        }); 
+        });
 
         if (discovery.IsError)
         {
@@ -43,11 +43,12 @@ public class IdentityService : IIdentityService
         }
         var refreshToken= await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken); //Cookie'denn refresh token alıyoruz.
 
-        RefreshTokenRequest refreshTokenRequest= new(){
-        ClientId=_clientSettings.WebClient.ClientId,
-        ClientSecret=_clientSettings.WebClient.ClientSecret,
-        RefreshToken=refreshToken,
-        Address=discovery.TokenEndpoint
+        RefreshTokenRequest refreshTokenRequest= new()
+        {
+            ClientId=_clientSettings.WebClient.ClientId,
+            ClientSecret=_clientSettings.WebClient.ClientSecret,
+            RefreshToken=refreshToken,
+            Address=discovery.TokenEndpoint
         };
         var token=await _httpClient.RequestRefreshTokenAsync(refreshTokenRequest);
         if (token.IsError)
@@ -69,12 +70,12 @@ public class IdentityService : IIdentityService
         var properties=authenticationResult.Properties;
         properties.StoreTokens(authenticationTokens);
         await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-            authenticationResult.Principal,properties);
+            authenticationResult.Principal, properties);
 
         return token;
 
 
-    }   
+    }
 
 
     public async Task RevokeRefreshToken() //Kullanıcı çıkış yaptığında token'ın silinmesi
@@ -89,12 +90,13 @@ public class IdentityService : IIdentityService
             throw discovery.Exception;
         }
         var refreshToken=await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
-        TokenRevocationRequest tokenRevocationRequest=new TokenRevocationRequest {
-        ClientId=_clientSettings.WebClientForUser.ClientId, //User olmayanında üyelik sistemi olmadığı için bu kısımlar olmaz.
-        ClientSecret=_clientSettings.WebClientForUser.ClientSecret,
-        Address=discovery.RevocationEndpoint,
-        Token=refreshToken,
-        TokenTypeHint="refresh_token"
+        TokenRevocationRequest tokenRevocationRequest=new TokenRevocationRequest
+        {
+            ClientId=_clientSettings.WebClientForUser.ClientId, //User olmayanında üyelik sistemi olmadığı için bu kısımlar olmaz.
+            ClientSecret=_clientSettings.WebClientForUser.ClientSecret,
+            Address=discovery.RevocationEndpoint,
+            Token=refreshToken,
+            TokenTypeHint="refresh_token"
         //Bu kısımlar IdentityModel sitesinden öğrenilebilir. 
         };
         await _httpClient.RevokeTokenAsync(tokenRevocationRequest);
@@ -137,9 +139,10 @@ public class IdentityService : IIdentityService
             return Response<bool>.Fail(errorDto.Errors, 400);
         }
         //Token içerisinde rol,email ve öteki bilgileri userinfo endpointine atacağımız req'den gelsin ki elimizdeki token'ı şişirmeyelim.
-        var userInfoRequest= new UserInfoRequest{
+        var userInfoRequest= new UserInfoRequest
+        {
             Token = token.AccessToken,
-            Address = discovery.TokenEndpoint 
+            Address = discovery.UserInfoEndpoint
         };
         var userInfo=await _httpClient.GetUserInfoAsync(userInfoRequest);
         if (userInfo.IsError)
@@ -157,7 +160,7 @@ public class IdentityService : IIdentityService
         ClaimsPrincipal claimsPrincipal=new(claimsIdentity);
 
         var authenticationProperties= new AuthenticationProperties(); //Accesstoken ve refresh token'ı cookie de tutacağız.
-        authenticationProperties.StoreTokens(new List<AuthenticationToken> { 
+        authenticationProperties.StoreTokens(new List<AuthenticationToken> {
             new AuthenticationToken{
                 Name=OpenIdConnectParameterNames.AccessToken,
                 Value=token.AccessToken },
@@ -166,7 +169,7 @@ public class IdentityService : IIdentityService
                 Value=token.RefreshToken },
               new AuthenticationToken{
                 Name=OpenIdConnectParameterNames.ExpiresIn,
-                Value=DateTime.Now.AddSeconds(token.ExpiresIn).ToString("O",CultureInfo.InvariantCulture) } 
+                Value=DateTime.Now.AddSeconds(token.ExpiresIn).ToString("O",CultureInfo.InvariantCulture) }
         }); //Buradaki name value'leri sabitlerden alalım OpenidConnect
 
         //oAuth2.0 yetkilendirmeyle ilgili bir protokoldür
@@ -177,7 +180,7 @@ public class IdentityService : IIdentityService
 
         authenticationProperties.IsPersistent = signInInput.RememberMe;
 
-        await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,claimsPrincipal,authenticationProperties);
+        await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
 
         return Response<bool>.Success(200);
 
