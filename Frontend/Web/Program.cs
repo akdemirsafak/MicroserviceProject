@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
+using Web.Handler;
 using Web.Models;
 using Web.Services;
 using Web.Services.Interfaces;
@@ -19,7 +20,7 @@ builder.Services.AddHttpClient<IIdentityService,IdentityService>();
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
     opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
-});
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>(); //UserService çağırıldığında requestin header'ine token ekleyecek.
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
 {
