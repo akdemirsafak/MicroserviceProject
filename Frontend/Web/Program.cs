@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.DependencyInjection;
 using Web.Handler;
 using Web.Models;
 using Web.Services;
@@ -16,6 +15,7 @@ builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("Cli
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<IIdentityService,IdentityService>();
+builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {

@@ -12,7 +12,7 @@ public class UserService : IUserService
         _httpClient = httpClient;
     }
 
-    public async Task<UserViewModel> GetUser()
+    public async Task<UserViewModel> GetUserAsync()
     {
         return await _httpClient.GetFromJsonAsync<UserViewModel>("/api/user/getuser"); //case sensitive değil.
         //Burada req. token eklemedik.Bunun yerine handle edeceğiz ve otomatik eklemesini sağlayacağız. 
