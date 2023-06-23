@@ -71,10 +71,7 @@ public class IdentityService : IIdentityService
         properties.StoreTokens(authenticationTokens);
         await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
             authenticationResult.Principal, properties);
-
         return token;
-
-
     }
 
 

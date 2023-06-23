@@ -11,10 +11,10 @@ public class UserService : IUserService
     {
         _httpClient = httpClient;
     }
-
+    
     public async Task<UserViewModel> GetUserAsync()
     {
-        return await _httpClient.GetFromJsonAsync<UserViewModel>("/api/user/getuser"); //case sensitive değil.
+        return await _httpClient.GetFromJsonAsync<UserViewModel>("/api/user/getuser"); //case sensitive değil. BURASI IDENTITYSERVER4 CONTROLLER'DA BELIRLEDIGIMIZ ENDPOINT
         //Burada req. token eklemedik.Bunun yerine handle edeceğiz ve otomatik eklemesini sağlayacağız. 
     }
 }
