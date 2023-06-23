@@ -14,8 +14,13 @@ builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddHttpClient<IIdentityService,IdentityService>();
+builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+
+builder.Services.AddHttpClient<ICatalogService, CatalogService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");
+});
 
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
@@ -25,7 +30,7 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
 {
     opt.LoginPath = "/Auth/SignIn";
-    opt.ExpireTimeSpan=TimeSpan.FromDays(60); //Cookie life refresh token 60 gün olduğu için burada da 60 yaptık.
+    opt.ExpireTimeSpan = TimeSpan.FromDays(60); //Cookie life refresh token 60 gün olduğu için burada da 60 yaptık.
     opt.SlidingExpiration = true; //Her giriş yapıldığında cookie ömrü uzasın 
     opt.Cookie.Name = "webCookie";
 

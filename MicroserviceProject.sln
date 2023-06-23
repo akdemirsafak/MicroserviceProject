@@ -65,7 +65,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceGateway", "Gate
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{2D8FAB47-E4EE-4DEE-9923-F061B677603A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Frontend\Web\Web.csproj", "{685DDEAC-CD19-404B-8C12-C3F61171CB82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Frontend\Web\Web.csproj", "{685DDEAC-CD19-404B-8C12-C3F61171CB82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

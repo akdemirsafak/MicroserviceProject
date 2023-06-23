@@ -9,7 +9,7 @@ public class UserViewModel
 
     public IEnumerable<string> GetUserProps()
     {
-        
+
         yield return UserName;
         yield return Email;
         yield return City;

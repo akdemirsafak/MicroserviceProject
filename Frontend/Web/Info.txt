@@ -1,0 +1,3 @@
+﻿## Catalog ve Photostock api
+
+üyelik sistemi gerektirmediği için Client Credential kullanacağız ve senkron iletişim ile bu işlemleri sağlayacağız.
