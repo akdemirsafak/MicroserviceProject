@@ -4,12 +4,12 @@ using System.Text.Json.Serialization;
 namespace SharedLibrary.Dtos { 
 public class Response<T>
 {
-    public T Data { get;private set; }
+    public T Data { get; set; }
     [JsonIgnore]
-    public int StatusCode { get; private set; } //Dönüş tipinden faydalanıcaz ama response'un içinde olmasına gerek duymuyoruz.
+    public int StatusCode { get;  set; } //Dönüş tipinden faydalanıcaz ama response'un içinde olmasına gerek duymuyoruz.
     [JsonIgnore] //Client bu bilgiyi görmeyecek
-    public bool IsSuccessfull { get; private set; }
-    public List<string> Errors { get; private set; }
+    public bool IsSuccessfull { get; set; }
+    public List<string> Errors { get; set; }
     //--Static Factory Method-- Static methodlarla geriye bir nesne dönülüyorsa. 
     public static Response<T> Success(T data,int statusCode) 
     {
