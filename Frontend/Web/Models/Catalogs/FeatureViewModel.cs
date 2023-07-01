@@ -1,6 +1,9 @@
-﻿namespace Web.Models.Catalogs;
+﻿using System.ComponentModel;
+
+namespace Web.Models.Catalogs;
 
 public class FeatureViewModel
 {
-    public string Duration { get; set; }
+    [DisplayName("Kurs Süresi : ")]
+    public int Duration { get; set; }
 }

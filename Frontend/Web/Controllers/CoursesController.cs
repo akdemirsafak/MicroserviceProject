@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SharedLibrary.Services;
+using Web.Models.Catalogs;
 using Web.Services.Interfaces;
 
 namespace Web.Controllers
@@ -17,81 +18,78 @@ namespace Web.Controllers
             _catalogService = catalogService;
             _sharedIdentityService = sharedIdentityService;
         }
-
-
-        // GET: CatalogController
         public async Task<IActionResult> Index()
         {
-            return View(await _catalogService.GetAllCoursesByUserIdAsync( _sharedIdentityService.GetUserId));
+            var myCourses = await _catalogService.GetAllCoursesByUserIdAsync(_sharedIdentityService.GetUserId);
+            return View(myCourses);
         }
-
-        // GET: CatalogController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Create()
         {
+            var categories = await _catalogService.GetAllCategoriesAsync();
+            ViewBag.categoryList = new SelectList(categories, "Id", "Name");
             return View();
         }
-
-        // GET: CatalogController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CatalogController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(CourseCreateInput courseCreateInput)
         {
-            try
+            var categories = await _catalogService.GetAllCategoriesAsync();
+            ViewBag.categoryList = new SelectList(categories, "Id", "Name");
+
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(courseCreateInput);
             }
-            catch
-            {
-                return View();
-            }
+            courseCreateInput.UserId = _sharedIdentityService.GetUserId;
+            await _catalogService.CreateCourseAsync(courseCreateInput);
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: CatalogController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: CatalogController/Edit/5
+        public async Task<IActionResult> Update(string id)
+        {
+            var course = await _catalogService.GetByCourseId(id);
+            var categories = await _catalogService.GetAllCategoriesAsync();
+            if (course is null)
+            {
+                RedirectToAction(nameof(Index));
+            }
+            CourseUpdateInput courseUpdateInput = new()
+            {
+                Id = course.Id,
+                Name = course.Name,
+                Description = course.Description,
+                Price = course.Price,
+                CategoryId = course.CategoryId,
+                Picture = course.Picture,
+                UserId = course.UserId,
+                Feature = course.Feature
+            };
+            ViewBag.categoryList = new SelectList(categories, "Id", "Name", course.CategoryId); //! 3. parametre ile bu kursa ait kategoriyi seçtik.
+            return View(courseUpdateInput);
+        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Update(CourseUpdateInput input)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var course = await _catalogService.GetByCourseId(input.Id);
+                var categories = await _catalogService.GetAllCategoriesAsync();
+                ViewBag.categoryList = new SelectList(categories, "Id", "Name", course.CategoryId);
+                return View(input);
             }
-            catch
-            {
-                return View();
-            }
+            await _catalogService.UpdateCourseAsync(input);
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: CatalogController/Delete/5
-        public ActionResult Delete(int id)
+
+
+
+
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            await _catalogService.DeleteCourseAsync(id);
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: CatalogController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
