@@ -2,5 +2,5 @@
 
 internal class Feature
 {
-    int Duration { get; set; }
+    public int Duration { get; set; }
 }

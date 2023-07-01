@@ -2,6 +2,5 @@
 
 public class FeatureDto
 {
-    public string Duration { get; set; }
-
+    public int Duration { get; set; }
 }

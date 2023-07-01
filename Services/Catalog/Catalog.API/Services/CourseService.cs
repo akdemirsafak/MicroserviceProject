@@ -39,7 +39,7 @@ public class CourseService:ICourseService
         List<CourseDto> courseListDto = _mapper.Map<List<CourseDto>>(courses);
         return Response<List<CourseDto>>.Success(courseListDto, 200);
     }
-    
+
     public async Task<SharedLibrary.Dtos.Response<CourseDto>> GetByIdAsync(string id)
     {
         var course = await _courseCollection.Find(course =>course.Id==id).FirstAsync();
@@ -102,4 +102,3 @@ public class CourseService:ICourseService
     }
 
 }
-    
