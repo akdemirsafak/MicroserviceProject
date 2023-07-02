@@ -1,4 +1,7 @@
-﻿namespace Web.Models.Catalogs;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Web.Models.Catalogs;
 
 public class CourseCreateInput
 {
@@ -9,4 +12,6 @@ public class CourseCreateInput
     public string? UserId { get; set; }
     public FeatureViewModel Feature { get; set; }
     public string CategoryId { get; set; }
+    [DisplayName("Photo")]
+    public IFormFile PhotoFormFile { get; set; }
 }

@@ -19,8 +19,8 @@ namespace PhotoStock.API.Controllers
                 var path=Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/photos",photo.FileName);
                 using var stream = new FileStream(path, FileMode.Create);
                 await photo.CopyToAsync(stream, cancellationToken);
-                var returnPath="photos/"+photo.FileName; //bu endpoint'in response u görselin adresi olacak.
-                PhotoDto returnPathDto=new() { Url=returnPath};
+                //var returnPath="photos/"+photo.FileName; //bu endpoint'in response u görselin adresi olacak.
+                PhotoDto returnPathDto=new() { Url=photo.FileName};
                 return CreateActionResult(Response<PhotoDto>.Success(returnPathDto, 201));
             }
             return CreateActionResult(Response<PhotoDto>.Fail("Photo Empty", 400));
