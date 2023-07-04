@@ -1,4 +1,6 @@
-﻿namespace Web.Models.Catalogs
+﻿using System.ComponentModel;
+
+namespace Web.Models.Catalogs
 {
     public class CourseUpdateInput
     {
@@ -10,5 +12,7 @@
         public string UserId { get; set; }
         public FeatureViewModel Feature { get; set; }
         public string CategoryId { get; set; }
+        [DisplayName("Photo")]
+        public IFormFile PhotoFormFile { get; set; }
     }
 }

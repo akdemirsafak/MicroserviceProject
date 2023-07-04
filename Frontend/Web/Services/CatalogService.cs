@@ -1,5 +1,6 @@
 ﻿using SharedLibrary.Dtos;
 using System.Net.Http.Json;
+using Web.Helpers;
 using Web.Models;
 using Web.Models.Catalogs;
 using Web.Services.Interfaces;
@@ -10,11 +11,13 @@ public class CatalogService : ICatalogService
 {
     private readonly HttpClient _httpClient;
     private readonly IPhotoStockService _photoStockService;
+    private readonly PhotoHelper _photoHelper;
 
-    public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService)
+    public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService, PhotoHelper photoHelper)
     {
         _httpClient = httpClient;
         _photoStockService = photoStockService;
+        _photoHelper = photoHelper;
     }
 
 
@@ -25,6 +28,7 @@ public class CatalogService : ICatalogService
         {
             return null;
         }
+        
         var responseSuccess=await response.Content.ReadFromJsonAsync<Response<List<CategoryViewModel>>>();
         return responseSuccess.Data;
     }
@@ -37,6 +41,10 @@ public class CatalogService : ICatalogService
             return null;
         }
         var responseSuccess=await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
+        responseSuccess.Data.ForEach(x =>
+        {
+            x.StockPictureUrl = _photoHelper.GetPhotoStockUrl(x.Picture);
+        });
         return responseSuccess.Data;
     
     }
@@ -49,6 +57,10 @@ public class CatalogService : ICatalogService
             return null;
         }
         var responseSuccess=await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
+        responseSuccess.Data.ForEach(x =>
+        {
+            x.StockPictureUrl = _photoHelper.GetPhotoStockUrl(x.Picture);
+        });
         return responseSuccess.Data;
     }
 
@@ -60,6 +72,7 @@ public class CatalogService : ICatalogService
             return null;
         }
         var responseSuccess=await response.Content.ReadFromJsonAsync<Response<CourseViewModel>>();
+            responseSuccess.Data.StockPictureUrl = _photoHelper.GetPhotoStockUrl(responseSuccess.Data.Picture);
         return responseSuccess.Data;
     }
 
@@ -77,6 +90,12 @@ public class CatalogService : ICatalogService
  
     public async Task<bool> UpdateCourseAsync(CourseUpdateInput input)
     {
+        var resultPhotoService= await _photoStockService.UploadPhoto(input.PhotoFormFile);
+        if (resultPhotoService is not null)
+        {
+            await _photoStockService.DeletePhoto(input.Picture);
+            input.Picture = resultPhotoService.Url;
+        }
         var response = await _httpClient.PutAsJsonAsync<CourseUpdateInput>($"courses",input);
         return response.IsSuccessStatusCode;
     }

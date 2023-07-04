@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SharedLibrary.Services;
 using Web.Handler;
+using Web.Helpers;
 using Web.Models;
 using Web.Services;
 using Web.Services.Interfaces;
@@ -48,7 +49,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 }); //Service'lerde bu kısımda jwt ile kullanıcı doğrulama yapıyorduk burada ise cookie ile.
 
-
+builder.Services.AddSingleton<PhotoHelper>();
 
 
 var app = builder.Build();

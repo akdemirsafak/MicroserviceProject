@@ -4,22 +4,13 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Kurs Güncelleme</h5>
-        <form
-          asp-controller="Courses"
-          asp-action="Update"
-          method="post"
-          enctype="multipart/form-data"
-        >
+        <form  asp-controller="Courses" asp-action="Update" method="post" enctype="multipart/form-data" >
         <div asp-validation-summary="ModelOnly"></div>
         <input type="hidden" asp-for="Id">
         <input type="hidden" asp-for="UserId">
         <input type="hidden" asp-for="Picture">
           <div class="mb-3">
-            <label
-              for="exampleFormControlInput1"
-              class="form-label"
-              asp-for="CategoryId"
-            ></label>
+            <label for="exampleFormControlInput1"  class="form-label"  asp-for="CategoryId"></label>
             <select
               asp-for="CategoryId"
               class="form-control"
@@ -51,6 +42,10 @@
               asp-validation-for="Feature.Duration"
             ></span>
           </div>
+        <div class="mb-3">
+            <label asp-for="PhotoFormFile" class="form-label"></label>
+            <input type="file" asp-for="PhotoFormFile" class="form-control" />
+        </div>
           <button type="submit" class="btn btn-primary">Kurs Kaydet</button>
         </form>
       </div>
