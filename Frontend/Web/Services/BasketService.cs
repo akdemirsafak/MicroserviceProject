@@ -1,4 +1,5 @@
-﻿using Web.Models.Baskets;
+﻿using SharedLibrary.Dtos;
+using Web.Models.Baskets;
 using Web.Services.Interfaces;
 
 namespace Web.Services;
@@ -12,9 +13,23 @@ public class BasketService : IBasketService
         _httpClient = httpClient;
     }
 
-    public Task AddBasketItem(BasketItemViewModel basketItemViewModel)
+    public async Task AddBasketItem(BasketItemViewModel basketItemViewModel)
     {
-        throw new NotImplementedException();
+        var basket=await Get();
+        if (basket is not null)
+        {
+            if (basket.BasketItems.Any(x => x.CourseId == basketItemViewModel.CourseId))
+            {
+                basket.BasketItems.Add(basketItemViewModel);
+            }
+        }
+        else
+        {
+            basket = new BasketViewModel();
+            basket.BasketItems.Add(basketItemViewModel);
+        }
+        await SaveOrUpdate(basket);
+
     }
 
     public Task<bool> ApplyDiscount(string discountCode)
@@ -27,23 +42,50 @@ public class BasketService : IBasketService
         throw new NotImplementedException();
     }
 
-    public Task<bool> Delete()
+    public async Task<bool> Delete()
     {
-        throw new NotImplementedException();
+        var result= await _httpClient.DeleteAsync("baskets");
+        return result.IsSuccessStatusCode;
     }
 
-    public Task<BasketViewModel> Get()
+    public async Task<BasketViewModel> Get()
     {
-        throw new NotImplementedException();
+        var response=await _httpClient.GetAsync("baskets");
+        if (response.IsSuccessStatusCode)
+        {
+            var basketViewModel= await response.Content.ReadFromJsonAsync<Response<BasketViewModel>>();
+            return basketViewModel.Data;
+        }
+        return null;
+
     }
 
-    public Task<bool> RemoveBasketItem(string basketItemId)
+    public async Task<bool> RemoveBasketItem(string basketItemId)
     {
-        throw new NotImplementedException();
+        var basket=await Get();
+        if (basket is null)
+        {
+            return false;
+        }
+        var deleteBasketItem= basket.BasketItems.First(x=>x.CourseId==basketItemId);
+        if (deleteBasketItem is null)
+        {  return false; }
+
+        var deleteResult=basket.BasketItems.Remove(deleteBasketItem);
+        if (!deleteResult)
+        {
+            return false;
+        }
+        if (basket.BasketItems.Any())
+        {
+            basket.DiscountCode = null;
+        }
+        return await SaveOrUpdate(basket);
     }
 
-    public Task<bool> SaveOrUpdate(BasketViewModel basketViewModel)
+    public async Task<bool> SaveOrUpdate(BasketViewModel basketViewModel)
     {
-        throw new NotImplementedException();
+        var response= await _httpClient.PostAsJsonAsync<BasketViewModel>("baskets",basketViewModel);
+        return response.IsSuccessStatusCode;
     }
 }
