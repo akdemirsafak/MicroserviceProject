@@ -24,7 +24,7 @@ namespace Basket.API.Controllers
         {
             //Jwt'nin payload'ında gelen user bilgilerini alalım:
             //var claims=HttpContext.User.Claims;
-            var claims = User.Claims;
+            //var claims = User.Claims;
             return CreateActionResult(await _basketService.GetBasket(_sharedIdentityService.GetUserId));
         }
 
