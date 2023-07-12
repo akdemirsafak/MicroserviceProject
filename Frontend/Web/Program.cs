@@ -1,17 +1,20 @@
-﻿using IdentityModel.AspNetCore.AccessTokenManagement;
+﻿using FluentValidation.AspNetCore;
+using IdentityModel.AspNetCore.AccessTokenManagement;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SharedLibrary.Services;
 using Web.Extensions;
 using Web.Handler;
 using Web.Helpers;
 using Web.Models;
+using Web.Models.Catalogs;
 using Web.Services;
 using Web.Services.Interfaces;
+using Web.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CourseCreateInputValidator>());
 
 builder.Services.AddHttpClientServices(builder.Configuration);
 
@@ -47,6 +50,7 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+app.UseExceptionHandler("/Home/Error");
 app.UseStaticFiles();
 
 app.UseRouting();

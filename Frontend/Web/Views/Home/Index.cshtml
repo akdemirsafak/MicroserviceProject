@@ -16,16 +16,14 @@
                     <img src="@course.StockPictureUrl" class="card-img-top img-fluid" style="height:256px;">
                 <div class="card-body">
                     <h5 class="card-title mb-3">@course.Name</h5>
-                    <hr>
-                        <p class="card-text"> @course.ShortDescription</p>
-                        <div class="row my-3">
-                            <div class="col d-block text-center align-middle">@course.Feature.Duration Saat</div>
-                            <div class="col d-block text-center align-middle">@course.Category.Name</div>
+                        <hr>
+                        <div class="text-dark d-block fw-bolder mb-3"><a href="#">@course.Category.Name</a> Kategorisinde</div>
+                        <div class="card-text d-block">
+                            <p>@course.ShortDescription</p>
                         </div>
-                        <div class="row">
-                            <div class="col d-block text-center align-middle">@course.Price TL</div>
-                            <div class="col"><a asp-controller="Home" asp-action="Detail" asp-route-id="@course.Id" class="btn btn-primary d-block">Bilgi</a></div>
-                    </div>
+                        <h6 class="text-primary">@course.Price TL</h6>
+                        <div class="col"><a asp-controller="Home" asp-action="Detail" asp-route-id="@course.Id" class="btn btn-primary d-block btn-sm">Bilgi</a></div>
+                   
                 </div>
             </div>
         </div>

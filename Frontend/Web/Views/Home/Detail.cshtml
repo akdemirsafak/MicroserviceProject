@@ -13,9 +13,10 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">@Model.Name</h3> 
-                <p class="card-text text-secondary my-4">@Model.Description</p>
-                <h4 class="card-title">Fiyatı : @Model.Price TL</h4>
+                <h3 class="card-title mb-2">@Model.Name</h3> 
+                <h6 class="card-link mb-3">Kategori : @Model.Category.Name </h6>
+                <div class="card-text text-secondary my-4">@Model.Description</div>
+                <h6 class="card-title">Fiyatı : @Model.Price TL</h6>
                 <a asp-controller="Basket" asp-action="AddBasketItem" asp-route-courseId="@Model.Id" class="btn btn-primary d-block">Sepete Ekle</a>
             </div>
         </div>
