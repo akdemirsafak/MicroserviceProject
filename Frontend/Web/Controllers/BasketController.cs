@@ -24,7 +24,7 @@ namespace Web.Controllers
         public async Task<IActionResult> AddBasketItem(string courseId)
         {
             var course = await _catalogService.GetByCourseId(courseId);
-            var basketItem = new BasketItemViewModel { CourseId = course.Id, CourseName = course.Name, Price = course.Price,Quantity=1 };
+            var basketItem = new BasketItemViewModel { CourseId = course.Id, CourseName = course.Name, Price = course.Price };
             await _basketService.AddBasketItem(basketItem);
             return RedirectToAction(nameof(Index));
         }
