@@ -40,4 +40,14 @@ public class BasketViewModel
     {
         get => !string.IsNullOrEmpty(DiscountCode) && DiscountRate.HasValue;
     }
+    public void ApplyDiscount(string code, int rate)
+    {
+        DiscountCode = code;
+        DiscountRate = rate;
+    }
+    public void CancelApplyDiscount()
+    {
+        DiscountCode = null;
+        DiscountRate = null;
+    }
 }

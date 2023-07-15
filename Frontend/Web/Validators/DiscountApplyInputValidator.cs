@@ -7,7 +7,9 @@ namespace Web.Validators
     {
         public DiscountApplyInputValidator() 
         {
-            RuleFor(x => x.Code).NotEmpty().WithMessage("İndirim kodu boş olamaz.");
+            RuleFor(x => x.Code)
+                .NotNull().WithMessage("İndirim kodu boş olamaz.")
+                .NotEmpty().WithMessage("İndirim kodu boş olamaz.");
         }
     }
 }
