@@ -21,7 +21,7 @@ namespace Order.Application.Commands.CreateOrder
                 request.Address.Line,
                 request.Address.ZipCode
             );
-            Domain.OrderAggregate.Order newOrder=new(address,request.UserId);
+            Domain.OrderAggregate.Order newOrder=new(address,request.BuyerId);
 
             request.OrderItems.ForEach(orderItem =>{
                 newOrder.AddOrderItem(orderItem.ProductId,orderItem.ProductName,orderItem.Price,orderItem.PictureUrl);
