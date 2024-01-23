@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using SharedLibrary.Services;
 using System.IdentityModel.Tokens.Jwt;
+using FakePayment.API;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +21,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     configs.RequireHttpsMetadata = false;
 });
 
+var rabbitMqSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
 
 
+builder.Services.AddMassTransit(setting =>
+{
+    //Default port :5672
+    setting.UsingRabbitMq((context, configuration) =>
+    {
+        configuration.Host(rabbitMqSettings.HostName,"/",host=>{
+            host.Username(rabbitMqSettings.UserName);
+            host.Password(rabbitMqSettings.Password);
+        });
+    });
+});
+
+builder.Services.AddMassTransitHostedService();
 
 builder.Services.AddControllers(opt => {
     opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy)); //User gerektiren  (Resource Owner Token) Identity'lerde authorizefilter kullanıyoruz.
