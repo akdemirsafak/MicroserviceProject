@@ -14,8 +14,10 @@ using Web.Validators;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CourseCreateInputValidator>());
+builder.Services.AddControllersWithViews();
+    //ddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CourseCreateInputValidator>()); Eski versiyon Deprecated
 
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddHttpClientServices(builder.Configuration);
 
 

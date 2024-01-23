@@ -33,6 +33,14 @@ public class CatalogService : ICatalogService
         return responseSuccess.Data;
     }
 
+    public async Task<bool> CreateCategoryAsync(CategoryCreateInput input)
+    {
+        
+        var response = await _httpClient.PostAsJsonAsync<CategoryCreateInput>($"categories",input);
+        return response.IsSuccessStatusCode;
+    }
+
+
     public async Task<List<CourseViewModel>> GetAllCoursesAsync()
     {
         var response= await _httpClient.GetAsync("courses"); //Controlleradı

@@ -7,7 +7,7 @@
             OrderItems = new List<OrderItemCreateInput>();
         }
 
-        public string UserId { get; set; }
+        public string BuyerId { get; set; }
         public List<OrderItemCreateInput>? OrderItems { get; set; }
         public AddressCreateInput Address { get; set; }
     }

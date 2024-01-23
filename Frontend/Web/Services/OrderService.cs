@@ -35,13 +35,13 @@ namespace Web.Services
             };
             var responsePayment= await _paymentService.ReceivePayment(paymentInfoInput);
 
-            if (!responsePayment)
-            {
-                return new OrderCreatedViewModel() { Error = "Ödeme alınamadı.",IsSuccess=false };
-            }
+            //if (!responsePayment)
+            //{
+            //    return new OrderCreatedViewModel() { Error = "Ödeme alınamadı.",IsSuccess=false };
+            //}
             var orderCreateInput = new CreateOrderInput()
             {
-                UserId=_sharedIdentityService.GetUserId,
+                BuyerId=_sharedIdentityService.GetUserId,
                 Address=new AddressCreateInput() {
                     District=checkoutInfoInput.District,
                     Line=checkoutInfoInput.Line,
@@ -49,25 +49,30 @@ namespace Web.Services
                     Street=checkoutInfoInput.Street,
                     ZipCode = checkoutInfoInput.ZipCode
                 },
+                
             };
 
             basket.BasketItems.ForEach(basketItem =>
             {
                 orderCreateInput.OrderItems.Add(new OrderItemCreateInput()
                 {
-                    Price=basketItem.Price,
+                    Price=basketItem.GetCurrentPrice,
                     ProductId=basketItem.CourseId,
                     ProductName=basketItem.CourseName,
                     PictureUrl=""
                 });
             });
-            var response= await _httpClient.PostAsJsonAsync<CreateOrderInput>("orders",orderCreateInput,CancellationToken.None);
-            if (response.IsSuccessStatusCode)
+            var response= await _httpClient.PostAsJsonAsync<CreateOrderInput>("orders",orderCreateInput);
+            if (!response.IsSuccessStatusCode)
             {
                 return new OrderCreatedViewModel() { Error = "Sipariş oluşturulamadı.", IsSuccess = false };
             }
-            var orderCreatedViewModel= await response.Content.ReadFromJsonAsync<OrderCreatedViewModel>();
-            return orderCreatedViewModel;
+            var orderCreatedViewModel= await response.Content.ReadFromJsonAsync<Response<OrderCreatedViewModel>>();
+            orderCreatedViewModel.Data.IsSuccess = true;
+
+            await _basketService.Delete();
+            
+            return orderCreatedViewModel.Data;
             
         }
 

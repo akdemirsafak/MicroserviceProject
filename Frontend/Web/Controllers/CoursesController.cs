@@ -87,5 +87,18 @@ namespace Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+
+        public async Task<IActionResult> CreateCategory()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(CategoryCreateInput categoryCreateInput)
+        {
+            var categories = await _catalogService.CreateCategoryAsync(categoryCreateInput);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
