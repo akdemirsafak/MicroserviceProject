@@ -22,3 +22,9 @@ Access Token Bearer type olarak dönecektir. Jwt.io 'dan içeriği kontrol edebi
 
 
 *****AccessToken'ın ömrü olabildiğince kısa olmalıdır.Elimizdeki refresh token ile yeniden access token alınabilir.
+
+
+//Bölüm 11 : MassTransit - RabbitMQ
+
+RabbitMq'ya mesaj gönderme işini frontend'de değil FakePayment service'de yapılması daha doğru olacaktır.
+Mesajı işlicek olan kısım Order'dır. Sipariş oluşturulduğunda istenen bilgileri messageCommand'a tanımlayalım.
