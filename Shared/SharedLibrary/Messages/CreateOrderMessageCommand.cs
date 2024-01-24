@@ -7,6 +7,10 @@ namespace SharedLibrary.Messages
     //Burada tanımlanan alanlar bir siparişin oluşabilmesi için önemli alanlardır.
     public class CreateOrderMessageCommand
     {
+        public CreateOrderMessageCommand()
+        {
+            OrderItems = new List<OrderItem>();
+        }
         public string BuyerId { get; set; }
         public List<OrderItem> OrderItems { get; set; }
         public string Province { get; set; }
@@ -19,10 +23,10 @@ namespace SharedLibrary.Messages
 
     public class OrderItem
     {
-        public string ProductId { get; private set; }
-        public string ProductName { get; private set; }
-        public string PictureUrl { get; private set; }
-        public decimal Price { get; private set;}
+        public string ProductId { get;  set; }
+        public string ProductName { get;  set; }
+        public string PictureUrl { get;  set; }
+        public decimal Price { get;  set;}
     }
     
 }
