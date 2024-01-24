@@ -28,3 +28,7 @@ Access Token Bearer type olarak dönecektir. Jwt.io 'dan içeriği kontrol edebi
 
 RabbitMq'ya mesaj gönderme işini frontend'de değil FakePayment service'de yapılması daha doğru olacaktır.
 Mesajı işlicek olan kısım Order'dır. Sipariş oluşturulduğunda istenen bilgileri messageCommand'a tanımlayalım.
+
+RabbitMQ Container ayağa kaldırırken eğer ui da kullanmak istiyorsak docker'in sitesinde "management" tag'li olanı indirmeliyiz.
+docker run -d --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management 
+default username password "guest" tir.
