@@ -1,6 +1,7 @@
 ﻿using Catalog.API.Mapping;
 using Catalog.API.Services;
 using Catalog.API.Settings;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
@@ -16,6 +17,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 }); //Scheme name. Birden fazla token türü bekleniyor olabilir.Bu ayrımı yapmak için Scheme name kullanılır.
 
 
+
+
+
+builder.Services.AddMassTransit(setting =>
+{
+    //Default port :5672
+    setting.UsingRabbitMq((context, configuration) =>
+    {
+        configuration.Host("localhost", "/", host =>
+        {
+            host.Username("guest");
+            host.Password("guest");
+        });
+    });
+});
 
 // Add services to the container.
 

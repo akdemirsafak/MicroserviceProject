@@ -2,8 +2,10 @@
 using Catalog.API.Dtos;
 using Catalog.API.Models;
 using Catalog.API.Settings;
+using Mass= MassTransit;
 using MongoDB.Driver;
 using SharedLibrary.Dtos;
+using SharedLibrary.Messages;
 
 namespace Catalog.API.Services;
 
@@ -12,17 +14,19 @@ public class CourseService:ICourseService
     private readonly IMongoCollection<Course> _courseCollection;
     private readonly IMongoCollection<Category> _categoryCollection;
     private readonly IMapper _mapper;
+    private readonly Mass.IPublishEndpoint _publishEndpoint;
 
-    public CourseService(IMapper mapper,IDatabaseSettings databaseSettings)
+    public CourseService(IMapper mapper, IDatabaseSettings databaseSettings, Mass.IPublishEndpoint publishEndpoint)
     {
         var client = new MongoClient(databaseSettings.ConnectionString);
         var database = client.GetDatabase(databaseSettings.DatabaseName);
         _courseCollection = database.GetCollection<Course>(databaseSettings.CourseCollectionName);
-        _categoryCollection=database.GetCollection<Category>(databaseSettings.CategoryCollectionName);
+        _categoryCollection = database.GetCollection<Category>(databaseSettings.CategoryCollectionName);
         _mapper = mapper;
+        _publishEndpoint = publishEndpoint;
     }
 
-    public async Task<SharedLibrary.Dtos.Response<List<CourseDto>>> GetAllAsync()
+    public async Task<Response<List<CourseDto>>> GetAllAsync()
     {
         var courses = await _courseCollection.Find(course => true).ToListAsync();
         if (courses.Any())
@@ -40,7 +44,7 @@ public class CourseService:ICourseService
         return Response<List<CourseDto>>.Success(courseListDto, 200);
     }
 
-    public async Task<SharedLibrary.Dtos.Response<CourseDto>> GetByIdAsync(string id)
+    public async Task<Response<CourseDto>> GetByIdAsync(string id)
     {
         var course = await _courseCollection.Find(course =>course.Id==id).FirstAsync();
         
@@ -86,6 +90,11 @@ public class CourseService:ICourseService
             return Response<NoContent>.Fail("Course Not Found", 404);
         }
         
+        await _publishEndpoint.Publish<CourseNameChangedEvent>(new
+        {
+            CourseId = courseUpdateDto.Id,
+            UpdatedName = courseUpdateDto.Name
+        });
         return Response<NoContent>.Success(204);
     }
     public async Task<Response<NoContent>> DeleteAsync(string courseId)
