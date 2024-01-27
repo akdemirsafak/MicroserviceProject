@@ -58,6 +58,8 @@ namespace MicroserviceProject.IdentityServer
 
             builder.AddResourceOwnerValidator<IdentityResourceOwnerPasswordValidator>();
 
+            builder.AddExtensionGrantValidator<TokenExchangeExtensionGrantValidator>(); //TokenExchangeExtensionGrantValidator'ı kullanacağımızı belirtiyoruz.
+
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
 
