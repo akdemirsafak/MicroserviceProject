@@ -70,10 +70,8 @@ namespace MicroserviceProject.IdentityServer
                     ClientSecrets={new Secret("secret".Sha256())},
                     AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,//ResourceOwnerPasswordAndClientCredentials kullanırsak refresh token kullanamayız.
                     AllowedScopes={"basket_fullpermission",
-                         "discount_fullpermission",
                          "gateway_fullpermission", //Kullanıcı için bir token alındığında gidilebilecek mikroservisler.
                          "order_fullpermission",
-                         "fakepayment_fullpermission", 
                          IdentityServerConstants.StandardScopes.Email,
                          IdentityServerConstants.StandardScopes.OpenId,
                          IdentityServerConstants.StandardScopes.Profile,
@@ -86,7 +84,26 @@ namespace MicroserviceProject.IdentityServer
                     AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds, //Refresh token 60 gün
                     RefreshTokenUsage=TokenUsage.ReUse //Tekrar kullanılabilir Refresh token
                     // ! Her accesstoken alımında yeni bir refresh token da alınacaktır!.
+                 },
+                  new Client()
+                {
+                    ClientName = "Token Exchange Client",
+                    ClientId="TokenExchangeClient",
+                    AllowOfflineAccess=true,
+                    ClientSecrets={new Secret("secret".Sha256())},
+                    AllowedGrantTypes=new []{"urn:ietf:params:oauth:grant-type:token-exchange" },
+                    AllowedScopes=
+                    { //Burada gateway'i dahil etmemize gerek yok çünkü gateway'in kendisi bu client'la beraber Identity Server'ımıza istek yapacak..
+                        "discount_fullpermission",
+                        "fakepayment_fullpermission",
+                        IdentityServerConstants.StandardScopes.OpenId
+                    }, 
+                    AccessTokenLifetime=1*60*60, 
+                    RefreshTokenExpiration=TokenExpiration.Absolute, 
+                    AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds, 
+                    RefreshTokenUsage=TokenUsage.ReUse
                  }
+                
                 
 
                 //// interactive client using code flow + pkce
