@@ -21,6 +21,9 @@ builder.Services.AddMassTransit(setting =>
 {
     setting.AddConsumer<CreateOrderMessageCommandConsumer>();
 
+    setting.AddConsumer<CourseNameChangedEventConsumer>();
+    //Catalog exchange'e gönderir. Exchange'deki mesajı alabilmemiz için queue oluşturmamız gerekir.Bu işlemi masstransit bizim için yapıyor.
+
     //Default port :5672
     setting.UsingRabbitMq((context, configuration) =>
     {
@@ -32,6 +35,10 @@ builder.Services.AddMassTransit(setting =>
         configuration.ReceiveEndpoint("create-order-service", e =>
         {
             e.ConfigureConsumer<CreateOrderMessageCommandConsumer>(context);
+        });
+        configuration.ReceiveEndpoint("course-name-changed-order-service", e =>
+        {
+            e.ConfigureConsumer<CourseNameChangedEventConsumer>(context);
         });
 
     });

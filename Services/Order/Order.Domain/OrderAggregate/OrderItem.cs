@@ -28,4 +28,10 @@ public class OrderItem:Entity
         PictureUrl = pictureUrl;
         Price = price;
     }
+    public void UpdateOrderItem(string productName, string pictureUrl, decimal price)
+    {
+        ProductName = productName;
+        Price = price;
+        PictureUrl = pictureUrl;
+    }
 }
