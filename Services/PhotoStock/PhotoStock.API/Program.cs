@@ -8,7 +8,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 {
     configs.Authority = builder.Configuration["IdentityServerURL"]; //Token dağıtmakla görevli api.Kritik! Bu kısmı appSettings.json da belirttik
     //Private key ile imzalanmış bir token geldiğinde public key ile doğrulaması yapılacak 
-    configs.Audience = "resource_photostock"; //IdentityServer'da belirttiğimiz isim.!
+    configs.Audience = "resource_photo_stock"; //IdentityServer'da belirttiğimiz isim.!
     configs.RequireHttpsMetadata = false; //Http kullandığımız için.
 }); //Scheme name. Birden fazla token türü bekleniyor olabilir.Bu ayrımı yapmak için Scheme name kullanılır.
 
