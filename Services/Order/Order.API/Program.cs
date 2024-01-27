@@ -54,7 +54,7 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub"); //sub alanÄ±nÄ
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(configs =>
 {
     configs.Authority = builder.Configuration["IdentityServerURL"];
-    configs.Audience = "resource_discount";
+    configs.Audience = "resource_order";
     configs.RequireHttpsMetadata = false;
 });
 
