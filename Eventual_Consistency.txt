@@ -1,0 +1,10 @@
+Eventual Consistency (Design pattern veya model)
+
+Mikroservislerimizin db'lerinin nasıl senkron hale getirileceği ile ilgilidir. Farklı db'lerde ortak sütunlar olabilmesi durumları.
+Eventual consistency'de bir mikroservisdeki db'de değişiklik olduğunda diğer mikroservislerdeki db'lerin de güncellenmesi için event fırlatılır.
+Eventual consistency ile mikroservislerin db'leri senkronize edilir.Mikroservis'lerde bolca kullanılır.Eventual consistency'de bazı gecikmeler olabilir.
+
+Bizim senaryomuzda Catalog mikroservisinde(course)'un değişen name'i ile Order mikroservisindeki satın alınan course name'lerinin senkronizasyonu sağlanacak.
+
+Eventual consistency detayları için: https://microservices.io/patterns/data/event-driven-architecture.html
+
