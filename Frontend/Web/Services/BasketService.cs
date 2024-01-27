@@ -96,7 +96,7 @@ public class BasketService : IBasketService
 
     public async Task<bool> SaveOrUpdate(BasketViewModel basketViewModel)
     {
-        var response = await _httpClient.PostAsJsonAsync("baskets", basketViewModel);
+        var response = await _httpClient.PostAsJsonAsync<BasketViewModel>("baskets", basketViewModel);
         return response.IsSuccessStatusCode;
     }
 }

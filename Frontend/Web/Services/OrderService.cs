@@ -35,10 +35,10 @@ namespace Web.Services
             };
             var responsePayment= await _paymentService.ReceivePayment(paymentInfoInput);
 
-            //if (!responsePayment)
-            //{
-            //    return new OrderCreatedViewModel() { Error = "Ödeme alınamadı.",IsSuccess=false };
-            //}
+            if (!responsePayment)
+            {
+                return new OrderCreatedViewModel() { Error = "Ödeme alınamadı.", IsSuccess = false };
+            }
             var orderCreateInput = new CreateOrderInput()
             {
                 BuyerId=_sharedIdentityService.GetUserId,
@@ -118,13 +118,14 @@ namespace Web.Services
                 TotalPrice = basket.TotalPrice,
                 Order = orderCreateInput
             };
-            
+
             var responsePayment= await _paymentService.ReceivePayment(paymentInfoInput);
             if (!responsePayment)
             {
-                return new OrderSuspendViewModel() { Error = "Ödeme alınamadı.",IsSuccessful= false };
+                return new OrderSuspendViewModel() { Error = "Ödeme alınamadı.", IsSuccessful = false };
             }
 
+            await _basketService.Delete();
             return new OrderSuspendViewModel() { IsSuccessful = true };
         }
     }

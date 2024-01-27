@@ -1,8 +1,10 @@
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Order.Application.Consumers;
 using Order.Application.Queries.GetOrdersByUserId;
 using Order.Infrastructure;
 using SharedLibrary.Services;
@@ -13,6 +15,29 @@ using static System.Net.Mime.MediaTypeNames;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+builder.Services.AddMassTransit(setting =>
+{
+    setting.AddConsumer<CreateOrderMessageCommandConsumer>();
+
+    //Default port :5672
+    setting.UsingRabbitMq((context, configuration) =>
+    {
+        configuration.Host("localhost", "/", host =>
+        {
+            host.Username("guest");
+            host.Password("guest");
+        });
+        configuration.ReceiveEndpoint("create-order-service", e =>
+        {
+            e.ConfigureConsumer<CreateOrderMessageCommandConsumer>(context);
+        });
+
+    });
+});
+
+
 
 
 var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
