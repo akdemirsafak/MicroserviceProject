@@ -14,13 +14,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		BasketApi_Infos.txt = BasketApi_Infos.txt
 		CatalogApi_Infos.txt = CatalogApi_Infos.txt
 		DiscountApi_Infos.txt = DiscountApi_Infos.txt
+		DockerCompose.docx = DockerCompose.docx
 		Docker_Config.txt = Docker_Config.txt
+		Eventual_Consistency.docx = Eventual_Consistency.docx
 		Gateway.txt = Gateway.txt
 		Infos.txt = Infos.txt
 		OrderApi_Infos.txt = OrderApi_Infos.txt
 		PhotoStockApi_Infos.txt = PhotoStockApi_Infos.txt
 		Ports.txt = Ports.txt
 		PostmanTest.txt = PostmanTest.txt
+		RabbitMq_Notlari.docx = RabbitMq_Notlari.docx
+		Token_Exchange.docx = Token_Exchange.docx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{F6B7A91B-A88F-42BA-8B38-0040DEAA54B9}"

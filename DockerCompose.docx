@@ -1,0 +1,12 @@
+﻿Docker Compose
+
+Mikroservislerin container olarak ayağa kaldırılması :
+
+Birden fazla container'la çalışmak istediğimizde Docker Compose kullanıyoruz. Docker Compose ile birden fazla container'ı tek bir komutla ayağa kaldırabiliyoruz, durdurabiliyoruz ve silebiliyoruz. 
+Docker Compose ile ayağa kaldıracağımız container'ların konfigürasyonlarını bir dosyada tutuyoruz. 
+Bu dosyaya docker-compose.yml adını veriyoruz.
+Bu dosyada container'ların konfigürasyonlarını tutarken, container'ların birbirleriyle iletişim kurabilmeleri için network konfigürasyonlarını da tutuyoruz.
+Docker Compose tool'u default olarak docker-compose.yml ve docker-compose.override.yml dosyalarını okur.
+Docker Compose.yml dosyasında temel konfigürasyon bilgileri tutulurken,
+docker-compose.override.yml dosyasında ise daha detaylı konfigürasyon bilgileri tutulur.
+Örneğin Mongodb kullanacaksak , mongodb container'ının konfigürasyon bilgilerini docker-compose.yml dosyasında tutarken, mongodb container'ının hangi porttan çalışacağı bilgisini docker-compose.override.yml dosyasında tutabiliriz.
