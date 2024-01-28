@@ -21,9 +21,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     configs.RequireHttpsMetadata = false;
 });
 
-builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService,SharedIdentityService>();
-
+builder.Services.AddScoped<IDiscountService,DiscountService>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers(opt =>{
     opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy)); //User gerektiren  (Resource Owner Token) Identity'lerde authorizefilter kullanıyoruz.
@@ -31,7 +31,6 @@ builder.Services.AddControllers(opt =>{
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IDiscountService,DiscountService>();
 
 var app = builder.Build();
 

@@ -14,7 +14,7 @@ public class PaymentService : IPaymentService
 
     public async Task<bool> ReceivePayment(PaymentInfoInput paymentInfoInput)
     {
-        var response= await _httpClient.PostAsJsonAsync<PaymentInfoInput>("fakepayment",paymentInfoInput);
+        var response= await _httpClient.PostAsJsonAsync<PaymentInfoInput>("fakepayments",paymentInfoInput);
         return response.IsSuccessStatusCode;
     }
 }

@@ -12,6 +12,7 @@ public static class ServiceExtensions
 
         services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
 
+        services.AddHttpClient<IIdentityService, IdentityService>();
         services.AddHttpClient<ICatalogService, CatalogService>(opt =>
         {
             opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");

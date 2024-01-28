@@ -20,24 +20,28 @@ public class ResourceOwnerPasswordTokenHandler : DelegatingHandler
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
-        request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer",accessToken);
-        //SPA kullanmak istesek Interceptor'lar ile çalışacaktık.
-        var response= await base.SendAsync(request, cancellationToken);
-        if (response.StatusCode==System.Net.HttpStatusCode.Unauthorized)
+
+        request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+        var response = await base.SendAsync(request, cancellationToken);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
         {
             var tokenResponse = await _identityService.GetAccessTokenByRefreshToken();
-            if (tokenResponse is not null)
+
+            if (tokenResponse != null)
             {
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenResponse.AccessToken);
-                await base.SendAsync(request, cancellationToken);
+
+                response = await base.SendAsync(request, cancellationToken);
             }
         }
-        if (response.StatusCode==System.Net.HttpStatusCode.Unauthorized)
-        {
-            //throw exception we will code middleware
-            throw new UnAuthorizeException();
 
+        if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            throw new UnAuthorizeException();
         }
+
         return response;
     }
 }

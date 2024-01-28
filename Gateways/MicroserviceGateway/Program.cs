@@ -1,4 +1,5 @@
-﻿using Ocelot.DependencyInjection;
+﻿using MicroserviceGateway.DelegateHandlers;
+using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +12,12 @@ builder.Services.AddAuthentication()
     opt.Audience = "resource_gateway";
     opt.RequireHttpsMetadata = false;
 });
+builder.Services.AddHttpClient<TokenExchangeDelegateHandler>();
+builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddOcelot();
+builder.Services
+    .AddOcelot()
+    .AddDelegatingHandler<TokenExchangeDelegateHandler>(); //TokenExchangeDelegateHandler'ı ekliyoruz.
 
 builder.Configuration.AddJsonFile($"configuration.{builder.Environment.EnvironmentName}.json")
     

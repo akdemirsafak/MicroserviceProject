@@ -1,15 +1,11 @@
 ﻿using FluentValidation.AspNetCore;
-using IdentityModel.AspNetCore.AccessTokenManagement;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SharedLibrary.Services;
 using Web.Extensions;
 using Web.Handler;
 using Web.Helpers;
 using Web.Models;
-using Web.Models.Catalogs;
 using Web.Services;
-using Web.Services.Interfaces;
-using Web.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +22,7 @@ builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("Cli
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
-builder.Services.AddHttpClient<IIdentityService, IdentityService>();
+
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 builder.Services.AddScoped<ClientCredentialTokenHandler>();
 builder.Services.AddAccessTokenManagement();
