@@ -25,7 +25,7 @@ builder.Services.AddMassTransit(setting =>
     //Default port :5672
     setting.UsingRabbitMq((context, configuration) =>
     {
-        configuration.Host("localhost", "/", host =>
+        configuration.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
         {
             host.Username("guest");
             host.Password("guest");
@@ -35,7 +35,8 @@ builder.Services.AddMassTransit(setting =>
 
 // Add services to the container.
 
-builder.Services.AddControllers(opt =>{
+builder.Services.AddControllers(opt =>
+{
     opt.Filters.Add(new AuthorizeFilter()); //Bu Api'daki tüm controller'ları authorize etmiş olduk.
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -46,11 +47,12 @@ builder.Services.AddSwaggerGen();
 
 //Options Pattern Implementation
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings")); //Datalari okuyarak DatabaseSettings class'ini doldurdu
-builder.Services.AddSingleton<IDatabaseSettings>(serviceProvider=> {
-    return serviceProvider.GetRequiredService<IOptions<DatabaseSettings>>().Value; 
+builder.Services.AddSingleton<IDatabaseSettings>(serviceProvider =>
+{
+    return serviceProvider.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });//IDatabaseSettings bir ctor'da gecildiginde bize DatabaseSettings'de tanimli degerler gelecek.
 
-builder.Services.AddScoped<ICategoryService,CategoryService>(); //Dependency injection
+builder.Services.AddScoped<ICategoryService, CategoryService>(); //Dependency injection
 builder.Services.AddScoped<ICourseService, CourseService>(); //Dependency injection
 builder.Services.AddAutoMapper(typeof(GeneralMapping));
 

@@ -16,6 +16,11 @@ Docker Compose ile container'ları ayağa kaldırmak için aşağıdaki komutu t
 
 docker-compose up -d
 ```
-Docker Compose ile ayağa kaldırılan container'ları durdurmak için aşağıdaki komutu terminalde kullanıyoruz :
+Docker Compose ile ayağa kaldırılan container'ları silmek için aşağıdaki komutu terminalde kullanıyoruz :
 docker-compose down
 ```
+Bir servisin kullandığı ekstra referansların(proje) da Dockerfile dosyasına eklenmesi gerekir.
+
+COPY Shared/SharedLibrary/*.csproj Shared/SharedLibrary/
+
+

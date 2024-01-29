@@ -1,0 +1,1 @@
+docker file'da yer alan expose'daki port numarası container'ların birbiriyle haberleşmesi içindir. Localhostta'ki port mapleme değildir.
