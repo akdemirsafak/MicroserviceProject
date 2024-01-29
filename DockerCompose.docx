@@ -10,3 +10,12 @@ Docker Compose tool'u default olarak docker-compose.yml ve docker-compose.overri
 Docker Compose.yml dosyasında temel konfigürasyon bilgileri tutulurken,
 docker-compose.override.yml dosyasında ise daha detaylı konfigürasyon bilgileri tutulur.
 Örneğin Mongodb kullanacaksak , mongodb container'ının konfigürasyon bilgilerini docker-compose.yml dosyasında tutarken, mongodb container'ının hangi porttan çalışacağı bilgisini docker-compose.override.yml dosyasında tutabiliriz.
+
+
+Docker Compose ile container'ları ayağa kaldırmak için aşağıdaki komutu terminalde kullanıyoruz :
+
+docker-compose up -d
+```
+Docker Compose ile ayağa kaldırılan container'ları durdurmak için aşağıdaki komutu terminalde kullanıyoruz :
+docker-compose down
+```
