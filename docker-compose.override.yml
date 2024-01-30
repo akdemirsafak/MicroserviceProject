@@ -27,12 +27,13 @@ services:
     container_name: identitydb
     restart: always
     ports:
-      - 1433:1433
+      - "1433:1433"
     volumes:
       - identitydb_volume:/var/opt/mssql
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=Password1234
+
   orderdb:
     container_name: orderdb
     restart: always
@@ -64,10 +65,35 @@ services:
 
   identityserver.api:
     container_name: identityserver.api
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:DefaultConnection=Server=identitydb,1433;Database=IdentityDb;User Id=sa;Password=Password1234"
+      - "ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=IdentityDb; User Id=sa; Password=Password1234"
     ports:
       - "5001:80"
     depends_on:
       - identitydb
+
+  basket.api:
+    container_name: basket.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityServerURL:http://identityserver.api:5001
+      - RedisSettings:Port=6379
+      - RedisSettings:Host=basketdb
+    ports:
+      - "5013:80"
+    depends_on:
+      - basketdb
+
+  photostock.api:
+    container_name: photostock.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityServerURL:http://identityserver.api:5001
+    ports:
+      - "5012:80"
+    volumes:
+      - type: bind
+        source: C:\Users\akdem\Desktop\PhotoStock\photos
+        target: /app/wwwroot/photos

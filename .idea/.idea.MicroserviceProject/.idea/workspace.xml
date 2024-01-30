@@ -61,43 +61,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Basket.API: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Catalog.API.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Catalog.API: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Discount.API: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.FakePayment.API: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.MicroserviceGateway: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.MicroserviceProject.IdentityServer: SelfHost.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Order.API: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.PhotoStock.API: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Web: http.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;MassTransit-RabbitMQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.smartKeys_rider&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.Basket.API: http.executor": "Run",
+    ".NET Launch Settings Profile.Catalog.API.executor": "Run",
+    ".NET Launch Settings Profile.Catalog.API: http.executor": "Run",
+    ".NET Launch Settings Profile.Discount.API: http.executor": "Run",
+    ".NET Launch Settings Profile.FakePayment.API: http.executor": "Run",
+    ".NET Launch Settings Profile.MicroserviceGateway: http.executor": "Run",
+    ".NET Launch Settings Profile.MicroserviceProject.IdentityServer: SelfHost.executor": "Run",
+    ".NET Launch Settings Profile.Order.API: http.executor": "Run",
+    ".NET Launch Settings Profile.PhotoStock.API: http.executor": "Run",
+    ".NET Launch Settings Profile.Web: http.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "DockerCompose",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.smartKeys_rider",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ],
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\akdem\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\akdem\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\akdem\\AppData\\Local\\Symbols\\src&quot;
+    "rider.external.source.directories": [
+      "C:\\Users\\akdem\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\akdem\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\akdem\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Multi-Launch.Multi-Launch: MicroserviceProject">
     <configuration name="Basket.API: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Services/Basket/Basket.API/Basket.API.csproj" />
@@ -536,6 +536,8 @@
       <workItem from="1706117833955" duration="2491000" />
       <workItem from="1706167685889" duration="3804000" />
       <workItem from="1706206420337" duration="1885000" />
+      <workItem from="1706434705256" duration="472000" />
+      <workItem from="1706533608980" duration="40000" />
     </task>
     <task id="LOCAL-00001" summary="MassTransit Framework notları eklendi">
       <option name="closed" value="true" />

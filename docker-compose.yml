@@ -1,31 +1,46 @@
-version: "3.8"
+version: "2.17"
 services:
   catalogdb:
     image: mongo
 
   basketdb:
     image: redis
+
   discountdb:
     image: postgres
 
   identitydb:
-    image: mcr.microsoft.com/mssql/server
+    image: mcr.microsoft.com/mssql/server:2019-latest
 
   orderdb:
-    image: mcr.microsoft.com/mssql/server
+    image: mcr.microsoft.com/mssql/server:2019-latest
 
   rabbitmq:
-    image: rabbitmq:3.12.12-management
+    image: rabbitmq:3.8.14-management
+
   catalog.api:
     image: catalog_api_image
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
+
   identityserver.api:
     image: identityserver_api_image
     build:
       context: .
-      dockerfile: MicroserviceProjecy.IdentityServer/Dockerfile
+      dockerfile: MicroserviceProject.IdentityServer/Dockerfile
+
+  basket.api:
+    image: basket_api_image
+    build:
+      context: .
+      dockerfile: Services/Basket/Basket.API/Dockerfile
+
+  photostock.api:
+    image: photostock_api_image
+    build:
+      context: .
+      dockerfile: Services/PhotoStock/PhotoStock.API/Dockerfile
 
 volumes:
   catalogdb_volume:
