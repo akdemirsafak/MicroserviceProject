@@ -1,4 +1,4 @@
-version: "2.17"
+version: "3.8"
 services:
   catalogdb:
     image: mongo
@@ -41,11 +41,18 @@ services:
     build:
       context: .
       dockerfile: Services/PhotoStock/PhotoStock.API/Dockerfile
+
   discount.api:
     image: discount_api_image
     build:
       context: .
       dockerfile: Services/Discount/Discount.API/Dockerfile
+
+  fakepayment.api:
+    image: fakepayment_api_image
+    build:
+      context: .
+      dockerfile: Services/FakePayment/FakePayment.API/Dockerfile
 
 volumes:
   catalogdb_volume:
