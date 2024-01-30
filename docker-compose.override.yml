@@ -59,8 +59,8 @@ services:
     container_name: catalog.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - RabbitMQUrl:rabbitmq
-      - IdentityServerURL:http://identityserver.api:5001
+      - RabbitMQUrl=rabbitmq
+      - IdentityServerURL=http://identityserver.api:5001
       - DatabaseSettings:ConnectionString=mongodb://catalogdb:27017
     ports:
       - "5011:80"
@@ -82,7 +82,7 @@ services:
     container_name: basket.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - IdentityServerURL:http://identityserver.api:5001
+      - IdentityServerURL=http://identityserver.api:5001
       - RedisSettings:Port=6379
       - RedisSettings:Host=basketdb
     ports:
@@ -94,7 +94,7 @@ services:
     container_name: photostock.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - IdentityServerURL:http://identityserver.api:5001
+      - IdentityServerURL=http://identityserver.api:5001
     ports:
       - "5012:80"
     volumes:
@@ -106,7 +106,7 @@ services:
     container_name: discount.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - IdentityServerURL:http://identityserver.api:5001
+      - IdentityServerURL=http://identityserver.api:5001
       - "ConnectionStrings:PostgreSql=User Id=postgres;Password=postgres;Server=discountdb;Port=5555;Database=discountdb;Integrated Security=true;Pooling=true;Pooling=true"
     ports:
       - "5014:80"
@@ -117,7 +117,19 @@ services:
     container_name: fakepayment.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - IdentityServerURL:http://identityserver.api:5001
-      - RabbitMQUrl:rabbitmq
+      - IdentityServerURL=http://identityserver.api:5001
+      - RabbitMQUrl=rabbitmq
     ports:
       - "5016:80"
+
+  order.api:
+    container_name: order.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityServerURL=http://identityserver.api:5001
+      - RabbitMQUrl=rabbitmq
+      - "ConnectionStrings:DefaultConnection=Server=orderdb,1444; Database=OrderDb; User Id=sa; Password=Password1234;TrustServerCertificate=True"
+    ports:
+      - "5015:80"
+    depends_on:
+      - orderdb

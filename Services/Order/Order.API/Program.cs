@@ -27,7 +27,7 @@ builder.Services.AddMassTransit(setting =>
     //Default port :5672
     setting.UsingRabbitMq((context, configuration) =>
     {
-        configuration.Host("localhost", "/", host =>
+        configuration.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
         {
             host.Username("guest");
             host.Password("guest");
@@ -59,9 +59,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 
-builder.Services.AddDbContext<OrderDbContext>(opt => {
+builder.Services.AddDbContext<OrderDbContext>(opt =>
+{
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-    opt => {
+    opt =>
+    {
         opt.MigrationsAssembly(Assembly.GetAssembly(typeof(OrderDbContext))!.GetName().Name); //DbContext'in bulunduğu class'ı dahil edelim.DbContext'den türetilen OrderDbContext'i dahil eder.
     });
 });
@@ -73,7 +75,8 @@ builder.Services.AddMediatR(typeof(GetOrdersByUserIdQueryHandler).Assembly);
 builder.Services.AddHttpContextAccessor();
 
 
-builder.Services.AddControllers(opt => { 
+builder.Services.AddControllers(opt =>
+{
     opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy)); //User gerektiren  (Resource Owner Token) Identity'lerde authorizefilter kullanıyoruz.
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
