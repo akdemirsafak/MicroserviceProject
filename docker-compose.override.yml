@@ -7,11 +7,13 @@ services:
       - "27017:27017"
     volumes:
       - catalogdb_volume:/data/db
+
   basketdb:
     container_name: basketdb
     restart: always
     ports:
       - "6379:6379"
+
   discountdb:
     container_name: discountdb
     restart: always
@@ -23,6 +25,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=discountdb
+
   identitydb:
     container_name: identitydb
     restart: always
@@ -44,6 +47,7 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=Password1234
+
   rabbitmq:
     container_name: rabbitmq
     restart: always
@@ -97,3 +101,14 @@ services:
       - type: bind
         source: C:\Users\akdem\Desktop\PhotoStock\photos
         target: /app/wwwroot/photos
+
+  discount.api:
+    container_name: discount.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityServerURL:http://identityserver.api:5001
+      - "ConnectionStrings:PostgreSql=User Id=postgres;Password=postgres;Server=discountdb;Port=5555;Database=discountdb;Integrated Security=true;Pooling=true;Pooling=true"
+    ports:
+      - "5014:80"
+    depends_on:
+      - discountdb
