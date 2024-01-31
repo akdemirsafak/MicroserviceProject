@@ -61,7 +61,7 @@ services:
       dockerfile: Services/Order/Order.API/Dockerfile
 
   gateway.api:
-    image: order_api_image
+    image: gateway_api_image
     build:
       context: .
       dockerfile: Gateways/MicroserviceGateway/Dockerfile
