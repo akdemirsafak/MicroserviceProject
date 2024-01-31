@@ -16,7 +16,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2019-latest
 
   rabbitmq:
-    image: rabbitmq:3.8.14-management
+    image: rabbitmq:3.13-rc-management
 
   catalog.api:
     image: catalog_api_image
@@ -59,6 +59,18 @@ services:
     build:
       context: .
       dockerfile: Services/Order/Order.API/Dockerfile
+
+  gateway.api:
+    image: order_api_image
+    build:
+      context: .
+      dockerfile: Gateways/MicroserviceGateway/Dockerfile
+
+  aspnetcoremvc.web:
+    image: aspnetcoremvc.web_image
+    build:
+      context: .
+      dockerfile: Frontend/Web/Dockerfile
 
 volumes:
   catalogdb_volume:
